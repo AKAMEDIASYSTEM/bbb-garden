@@ -64,6 +64,7 @@ def do_sensor_read():
     tmp36reading = adc.read_raw(tmp36Pin)
     millivolts = tmp36reading * 1800  # 1.8V reference = 1800 mV
     temp_c = (millivolts - 500) / 10
+    print temp_c
     readings.append({'key':'tankLevel','v': tank}) # tank level
     readings.append({'key':'photocell','v': photo}) # photocell
     readings.append({'key':'air_temp','v': temp_c}) # photocell
