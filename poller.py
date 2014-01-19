@@ -14,6 +14,7 @@ TMP102 i2c temperature sensor, address 0x48
 Outputs:
 Analog RGB LED strip
 I2C display(?)
+Pump Activate/Deactivate (GPIO pin)
 
 '''
 from Adafruit_I2C import Adafruit_I2C
@@ -23,17 +24,19 @@ import Adafruit_BBIO.UART as uart
 import Adafruit_BBIO.PWM as pwm
 import Adafruit_BBIO.GPIO as gpio
 import Adafruit_BBIO.ADC as adc
+import TMP102 as tmp102
 import datetime
 import random
 from tempodb import Client, DataPoint
 import key
 
-client = Client(key.API_KEY, key.API_SECRET)
-interval = 120 # seconds between samples
+
+interval = 20 # seconds between samples
 greenPin = 'P8_13'
 bluePin = 'P9_14'
 redPin = 'P8_19'
 servoPin = 'P9_16'
+readings = []
 
 def exit_handler():
     print 'exiting'
@@ -47,14 +50,22 @@ def do_sensor_read():
 	# value = ADC.read("AIN1")
 	# adc returns value from 0 to 1.
 	# use read_raw(pin) to get V values
-
+	readings.append({'tankLevel': adc.read('AIN0')}) # tank level
+	readings.append({'photocell': adc.read('AIN1')}) # photocell
+	# readings.append({'air_temp': t.getTemp()})
 
 def do_db_update():
+	client = Client(key.API_KEY, key.API_SECRET)
+	date = datetime.datetime.now()
+	payload = {'t':date, }
+	client.write_multi
+
 
 def do_state_display():
 
 
 adc.setup()
+# t = tmp102.TMP102()
 # NOTE
 # There is currently a bug in the ADC driver.
 # You'll need to read the values twice
