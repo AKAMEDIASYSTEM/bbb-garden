@@ -62,7 +62,7 @@ def do_db_update():
 
 
 def do_state_display():
-
+	pass
 
 adc.setup()
 # t = tmp102.TMP102()
