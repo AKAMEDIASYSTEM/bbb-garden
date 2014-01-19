@@ -51,8 +51,12 @@ def do_sensor_read():
 	# value = ADC.read("AIN1")
 	# adc returns value from 0 to 1.
 	# use read_raw(pin) to get V values
-	readings.append({'key':'tankLevel','v': adc.read('AIN0')}) # tank level
-	readings.append({'key':'photocell','v': adc.read('AIN1')}) # photocell
+	tank = adc.read('AIN0')
+	print tank
+	photo = adc.read('AIN1')
+	print photo
+	readings.append({'key':'tankLevel','v': tank}) # tank level
+	readings.append({'key':'photocell','v': photo}) # photocell
 	# readings.append({'air_temp': t.getTemp()})
 
 def do_db_update():
