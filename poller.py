@@ -111,4 +111,5 @@ while True:
         do_state_display()
     except:
         pass
+    print 'waiting'
     time.sleep(interval)
