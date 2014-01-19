@@ -48,6 +48,7 @@ def exit_handler():
 
 def do_sensor_read():
     print 'sensor read'
+    global readings
     readings = []
     # value = ADC.read("AIN1")
     # adc returns value from 0 to 1.
@@ -62,6 +63,7 @@ def do_sensor_read():
 
 def do_db_update():
     print 'db update'
+    global readings
     print readings
     client = tempodb.Client(key.API_KEY, key.API_SECRET)
     date = datetime.datetime.now()
