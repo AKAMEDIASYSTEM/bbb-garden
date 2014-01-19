@@ -32,7 +32,7 @@ import tempodb
 import key
 
 
-interval = 20 # seconds between samples
+interval = 120 # seconds between samples
 greenPin = 'P8_13'
 bluePin = 'P9_14'
 redPin = 'P8_19'
