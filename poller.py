@@ -47,24 +47,24 @@ def exit_handler():
     pwm.cleanup()
 
 def do_sensor_read(self):
-    print 'sensor read'
+    self.print 'sensor read'
     readings = []
     # value = ADC.read("AIN1")
     # adc returns value from 0 to 1.
     # use read_raw(pin) to get V values
     tank = adc.read('AIN0')
-    print tank
+    self.print tank
     photo = adc.read('AIN1')
-    print photo
+    self.print photo
     readings.append({'key':'tankLevel','v': tank}) # tank level
     readings.append({'key':'photocell','v': photo}) # photocell
     # readings.append({'air_temp': t.getTemp()})
 
 def do_db_update(self):
-    print 'db update'
+    self.print 'db update'
     client = tempodb.Client(key.API_KEY, key.API_SECRET)
     date = datetime.datetime.now()
-    print date
+    self.print date
     client.write_bulk(date, readings)
 
 
