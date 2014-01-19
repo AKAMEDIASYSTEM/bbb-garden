@@ -65,7 +65,7 @@ def do_db_update():
 	client = Client(key.API_KEY, key.API_SECRET)
 	date = datetime.datetime.now()
 	payload = {'t':date, 'data':readings}
-	client.write_bulk(payload)
+	client.write_bulk(date, readings)
 
 
 def do_state_display():
