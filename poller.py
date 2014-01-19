@@ -47,6 +47,7 @@ def exit_handler():
     pwm.cleanup()
 
 def do_sensor_read():
+	print 'sensor read'
 	# value = ADC.read("AIN1")
 	# adc returns value from 0 to 1.
 	# use read_raw(pin) to get V values
@@ -55,14 +56,15 @@ def do_sensor_read():
 	# readings.append({'air_temp': t.getTemp()})
 
 def do_db_update():
+	print 'db update'
 	client = Client(key.API_KEY, key.API_SECRET)
 	date = datetime.datetime.now()
-	payload = {'t':date, }
-	client.write_multi
+	payload = {'t':date, 'data':readings}
+	client.write_multi(payload)
 
 
 def do_state_display():
-	pass
+	print 'state_display'
 
 adc.setup()
 # t = tmp102.TMP102()
