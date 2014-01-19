@@ -69,6 +69,7 @@ def do_db_update():
 
 def do_state_display():
 	print 'state_display'
+	print date
 
 adc.setup()
 # t = tmp102.TMP102()
