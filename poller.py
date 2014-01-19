@@ -47,29 +47,29 @@ def exit_handler():
     pwm.cleanup()
 
 def do_sensor_read(self):
-	print 'sensor read'
-	readings = []
-	# value = ADC.read("AIN1")
-	# adc returns value from 0 to 1.
-	# use read_raw(pin) to get V values
-	tank = adc.read('AIN0')
-	print tank
-	photo = adc.read('AIN1')
-	print photo
-	readings.append({'key':'tankLevel','v': tank}) # tank level
-	readings.append({'key':'photocell','v': photo}) # photocell
-	# readings.append({'air_temp': t.getTemp()})
+    print 'sensor read'
+    readings = []
+    # value = ADC.read("AIN1")
+    # adc returns value from 0 to 1.
+    # use read_raw(pin) to get V values
+    tank = adc.read('AIN0')
+    print tank
+    photo = adc.read('AIN1')
+    print photo
+    readings.append({'key':'tankLevel','v': tank}) # tank level
+    readings.append({'key':'photocell','v': photo}) # photocell
+    # readings.append({'air_temp': t.getTemp()})
 
 def do_db_update(self):
-	print 'db update'
-	client = tempodb.Client(key.API_KEY, key.API_SECRET)
-	date = datetime.datetime.now()
-	print date
-	client.write_bulk(date, readings)
+    print 'db update'
+    client = tempodb.Client(key.API_KEY, key.API_SECRET)
+    date = datetime.datetime.now()
+    print date
+    client.write_bulk(date, readings)
 
 
 def do_state_display(self):
-	print 'state_display'
+    print 'state_display'
 
 print 'starting sampling at'
 print datetime.datetime.now()
@@ -85,16 +85,16 @@ pwm.start(bluePin, 10.0, 2000.0)
 atexit.register(exit_handler)
 
 while True:
-	try:
-		do_sensor_read()
-	except:
-		pass
-	try:
-		do_db_update()
-	except:
-		pass
-	try:
-		do_state_display()
-	except:
-		pass
-	# time.sleep(interval)
+    try:
+        do_sensor_read()
+    except:
+        pass
+    try:
+        do_db_update()
+    except:
+        pass
+    try:
+        do_state_display()
+    except:
+        pass
+    # time.sleep(interval)
