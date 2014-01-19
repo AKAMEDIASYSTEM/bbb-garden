@@ -48,6 +48,7 @@ def exit_handler():
 
 def do_sensor_read():
 	print 'sensor read'
+	readings = []
 	# value = ADC.read("AIN1")
 	# adc returns value from 0 to 1.
 	# use read_raw(pin) to get V values
@@ -64,7 +65,7 @@ def do_db_update():
 	client = Client(key.API_KEY, key.API_SECRET)
 	date = datetime.datetime.now()
 	payload = {'t':date, 'data':readings}
-	client.write_multi(payload)
+	client.write_bulk(payload)
 
 
 def do_state_display():
