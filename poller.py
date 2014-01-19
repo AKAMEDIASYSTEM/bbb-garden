@@ -27,7 +27,7 @@ import Adafruit_BBIO.ADC as adc
 import TMP102 as tmp102
 import datetime
 import random
-from tempodb import Client, DataPoint
+import tempodb
 import key
 
 
@@ -62,7 +62,7 @@ def do_sensor_read(self):
 
 def do_db_update(self):
 	print 'db update'
-	client = Client(key.API_KEY, key.API_SECRET)
+	client = tempodb.Client(key.API_KEY, key.API_SECRET)
 	date = datetime.datetime.now()
 	print date
 	client.write_bulk(date, readings)
