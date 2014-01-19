@@ -62,9 +62,9 @@ def do_sensor_read():
 
 def do_db_update():
     print 'db update'
+    print readings
     client = tempodb.Client(key.API_KEY, key.API_SECRET)
     date = datetime.datetime.now()
-    print date
     client.write_bulk(date, readings)
 
 
