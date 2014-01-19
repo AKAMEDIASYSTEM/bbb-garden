@@ -71,6 +71,8 @@ def do_db_update(self):
 def do_state_display(self):
 	print 'state_display'
 
+print 'starting sampling at'
+print datetime.datetime.now()
 adc.setup()
 # t = tmp102.TMP102()
 # NOTE
