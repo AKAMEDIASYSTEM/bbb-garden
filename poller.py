@@ -97,4 +97,4 @@ while True:
         do_state_display()
     except:
         pass
-    # time.sleep(interval)
+    time.sleep(interval)
