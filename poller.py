@@ -75,7 +75,7 @@ def do_state_display():
     print 'state_display'
 
 print 'starting sampling at'
-print datetime.datetime.now()
+print datetime.datetime.now(tzlocal())
 adc.setup()
 # t = tmp102.TMP102()
 # NOTE
