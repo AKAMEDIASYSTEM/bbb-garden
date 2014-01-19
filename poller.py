@@ -26,6 +26,7 @@ import Adafruit_BBIO.GPIO as gpio
 import Adafruit_BBIO.ADC as adc
 import TMP102 as tmp102
 import datetime
+from dateutil.tz import tzlocal
 import random
 import tempodb
 import key
@@ -66,7 +67,7 @@ def do_db_update():
     global readings
     print readings
     client = tempodb.Client(key.API_KEY, key.API_SECRET)
-    date = datetime.datetime.now()
+    date = datetime.datetime.now(tzlocal())
     client.write_bulk(date, readings)
 
 
