@@ -17,3 +17,26 @@ import key
 
 
 client = Client(API_KEY, API_SECRET)
+
+def do_sensor_read():
+
+def do_db_update():
+
+def do_state_display():
+	
+
+
+while True:
+	try:
+		do_sensor_read()
+	except:
+		pass
+	try:
+		do_db_update()
+	except:
+		pass
+	try:
+		do_state_display()
+	except:
+		pass
+	time.sleep(interval)
