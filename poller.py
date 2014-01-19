@@ -58,10 +58,13 @@ def do_sensor_read():
     # adc returns value from 0 to 1.
     # use read_raw(pin) to get V values
     tank = adc.read(tankPin)
+    tank = adc.read(tankPin) # have to read twice due to bbio bug
     print tank
     photo = adc.read(photoPin)
+    photo = adc.read(photoPin) # have to read twice due to bbio bug
     print photo
     tmp36reading = adc.read_raw(tmp36Pin)
+    tmp36reading = adc.read_raw(tmp36Pin) # have to read twice due to bbio bug
     millivolts = tmp36reading * 1800  # 1.8V reference = 1800 mV
     temp_c = (millivolts - 500) / 10
     print temp_c
