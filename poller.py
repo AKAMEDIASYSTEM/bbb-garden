@@ -37,6 +37,9 @@ greenPin = 'P8_13'
 bluePin = 'P9_14'
 redPin = 'P8_19'
 servoPin = 'P9_16'
+tankPin = 'AIN0'
+photoPin = 'AIN1'
+tmp36Pin = 'AIN2'
 readings = []
 
 def exit_handler():
@@ -54,12 +57,16 @@ def do_sensor_read():
     # value = ADC.read("AIN1")
     # adc returns value from 0 to 1.
     # use read_raw(pin) to get V values
-    tank = adc.read('AIN0')
+    tank = adc.read(tankPin)
     print tank
-    photo = adc.read('AIN1')
+    photo = adc.read(photoPin)
     print photo
+    tmp36reading = adc.read_raw(tmp36Pin)
+    millivolts = tmp36reading * 1800  # 1.8V reference = 1800 mV
+    temp_c = (millivolts - 500) / 10
     readings.append({'key':'tankLevel','v': tank}) # tank level
     readings.append({'key':'photocell','v': photo}) # photocell
+    readings.append({'key':'air_temp','v': temp_c}) # photocell
     # readings.append({'air_temp': t.getTemp()})
 
 def do_db_update():
