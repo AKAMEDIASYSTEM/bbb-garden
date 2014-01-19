@@ -46,7 +46,7 @@ def exit_handler():
     pwm.stop(servoPin)
     pwm.cleanup()
 
-def do_sensor_read():
+def do_sensor_read(self):
 	print 'sensor read'
 	readings = []
 	# value = ADC.read("AIN1")
@@ -60,17 +60,16 @@ def do_sensor_read():
 	readings.append({'key':'photocell','v': photo}) # photocell
 	# readings.append({'air_temp': t.getTemp()})
 
-def do_db_update():
+def do_db_update(self):
 	print 'db update'
 	client = Client(key.API_KEY, key.API_SECRET)
 	date = datetime.datetime.now()
-	payload = {'t':date, 'data':readings}
+	print date
 	client.write_bulk(date, readings)
 
 
-def do_state_display():
+def do_state_display(self):
 	print 'state_display'
-	print datetime.datetime.now()
 
 adc.setup()
 # t = tmp102.TMP102()
