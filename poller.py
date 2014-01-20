@@ -77,9 +77,12 @@ def do_db_update():
     print 'db update'
     global readings
     print readings
-    client = tempodb.Client(key.API_KEY, key.API_SECRET)
-    date = datetime.datetime.now(tzlocal())
-    client.write_bulk(date, readings)
+    if readings != NULL:
+	    client = tempodb.Client(key.API_KEY, key.API_SECRET)
+	    date = datetime.datetime.now(tzlocal())
+	    client.write_bulk(date, readings)
+	else:
+		print 'NULL readings'
 
 
 def do_state_display():
