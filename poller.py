@@ -87,6 +87,8 @@ def do_db_update():
 
 def do_state_display():
     print 'state_display'
+    # so, what will state display be?
+    # I2C display of tank temp?
 
 print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
