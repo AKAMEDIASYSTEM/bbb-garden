@@ -39,7 +39,9 @@ redPin = 'P8_19'
 servoPin = 'P9_16'
 tankPin = 'AIN0'
 photoPin = 'AIN1'
-tmp36Pin = 'AIN2'
+thermistor1 = 'AIN2'
+thermistor2 = 'AIN3'
+pumpPin = ''
 readings = []
 
 def exit_handler():
@@ -60,17 +62,32 @@ def do_sensor_read():
     tank = adc.read(tankPin)
     tank = adc.read(tankPin) # have to read twice due to bbio bug
     print tank
+    
     photo = adc.read(photoPin)
     photo = adc.read(photoPin) # have to read twice due to bbio bug
     print photo
-    tmp36reading = adc.read_raw(tmp36Pin)
-    tmp36reading = adc.read_raw(tmp36Pin) # have to read twice due to bbio bug
-    millivolts = tmp36reading * 1800  # 1.8V reference = 1800 mV
-    temp_c = (millivolts - 500) / 10
-    print temp_c
+
+    temp1 = adc.read(thermistor1)
+    temp1 = adc.read(thermistor1)
+    print temp1
+    # do conversion per
+    # http://learn.adafruit.com/thermistor/using-a-thermistor
+
+    temp2 = adc.read(thermistor2)
+    temp2 = adc.read(thermistor2)
+    print temp2
+    # do conversion per
+    # http://learn.adafruit.com/thermistor/using-a-thermistor
+    # tmp36reading = adc.read_raw(tmp36Pin)
+    # tmp36reading = adc.read_raw(tmp36Pin) # have to read twice due to bbio bug
+    # millivolts = tmp36reading * 1800  # 1.8V reference = 1800 mV
+    # temp_c = (millivolts - 500) / 10
+    # print temp_c
     readings.append({'key':'tankLevel','v': tank}) # tank level
     readings.append({'key':'photocell','v': photo}) # photocell
-    readings.append({'key':'air_temp','v': temp_c}) # photocell
+    readings.append({'key':'thermistor1','v':temp1})
+    readings.append({'key':'thermistor2','v':temp2})
+    # readings.append({'key':'air_temp','v': temp_c}) # photocell
     # readings.append({'air_temp': t.getTemp()})
 
 def do_db_update():
