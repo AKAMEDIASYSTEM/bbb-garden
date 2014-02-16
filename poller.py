@@ -68,16 +68,19 @@ def do_sensor_read():
     # adc returns value from 0 to 1.
     # use read_raw(pin) to get V values
     tank = adc.read(tankPin)
+    time.sleep(1)
     tank = adc.read(tankPin) # have to read twice due to bbio bug
     time.sleep(3)
     print tank
     
     photo = adc.read(photoPin)
+    time.sleep(1)
     photo = adc.read(photoPin) # have to read twice due to bbio bug
     time.sleep(3)
     print photo
 
     temp1 = adc.read_raw(thermistor1)
+    time.sleep(1)
     temp1 = adc.read_raw(thermistor1)
     time.sleep(3)
     print temp1
@@ -87,6 +90,7 @@ def do_sensor_read():
     # http://learn.adafruit.com/thermistor/using-a-thermistor
 
     temp2 = adc.read_raw(thermistor2)
+    time.sleep(1)
     temp2 = adc.read_raw(thermistor2)
     time.sleep(3)
     print temp2
