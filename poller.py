@@ -108,6 +108,16 @@ def do_state_display():
     # so, what will state display be?
     # I2C display of tank temp?
 
+def do_pump_toggle():
+    print 'pump actuate'
+    if (datetime.datetime.today().hour>6 and datetime.datetime.today().hour<23):
+        if(datetime.datetime.today().minute%5 == 0):
+            gpio.output(pumpPin,gpio.HIGH)
+        else:
+            gpio.output(pumpPin,gpio.LOW)
+    else:
+        gpio.output(pumpPin,gpio.LOW)
+
 print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
 adc.setup()
@@ -126,17 +136,19 @@ while True:
     try:
         do_sensor_read()
     except:
-        pass
+        print 'sensor_read error!'
     try:
         do_db_update()
     except:
-        pass
+        print 'do_db_update error!'
     try:
         do_state_display()
     except:
-        pass
-    if datetime.datetime.today().minute % 5 !=0:
-        gpio.output(pumpPin,gpio.LOW)
+        print 'do_state_display error!'
+    try:
+        do_pump_toggle()
+    except:
+        print 'do_pump_toggle error!'
     else:
         gpio.output(pumpPin,gpio.HIGH)
     print 'waiting'
