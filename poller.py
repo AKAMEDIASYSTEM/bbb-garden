@@ -85,7 +85,7 @@ def do_sensor_read():
     time.sleep(3)
     print temp1
     temp1 = convert_thermistor(temp1)
-    print temp1
+    print 'converted bed_temp is %s' % temp1
     # do conversion per
     # http://learn.adafruit.com/thermistor/using-a-thermistor
 
@@ -95,7 +95,7 @@ def do_sensor_read():
     time.sleep(3)
     print temp2
     temp2 = convert_thermistor(temp2)
-    print temp2
+    print 'converted reservoir_temp is %s' % temp2
     # do conversion per
     # http://learn.adafruit.com/thermistor/using-a-thermistor
     # tmp36reading = adc.read_raw(tmp36Pin)
