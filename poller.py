@@ -38,9 +38,9 @@ bluePin = 'P9_14'
 redPin = 'P8_19'
 servoPin = 'P9_16'
 tankPin = 'AIN0'
-photoPin = 'AIN1'
-thermistor1 = 'AIN2'
-thermistor2 = 'AIN3'
+photoPin = 'AIN3'
+thermistor1 = 'AIN1' # bed temp
+thermistor2 = 'AIN2' # reservoir temp
 pumpPin = 'P8_10'
 readings = []
 
@@ -86,8 +86,8 @@ def do_sensor_read():
     # print temp_c
     readings.append({'key':'tankLevel','v': tank}) # tank level
     readings.append({'key':'photocell','v': photo}) # photocell
-    readings.append({'key':'thermistor1','v':temp1})
-    readings.append({'key':'thermistor2','v':temp2})
+    readings.append({'key':'bed_temp','v':temp1})
+    readings.append({'key':'reservoir_temp','v':temp2})
     # readings.append({'key':'air_temp','v': temp_c}) # photocell
     # readings.append({'air_temp': t.getTemp()})
 
