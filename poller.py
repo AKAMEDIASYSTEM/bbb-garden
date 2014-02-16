@@ -82,7 +82,7 @@ def do_sensor_read():
     time.sleep(1)
     print temp1
     temp1 = convert_thermistor(temp1)
-    print temp2
+    print temp1
     # do conversion per
     # http://learn.adafruit.com/thermistor/using-a-thermistor
 
