@@ -107,12 +107,11 @@ def convert_thermistor(raw):
   print 'Thermistor resistance ' 
   print average
  
-  float steinhart
-  steinhart = average / THERMISTORNOMINAL     # (R/Ro)
+  steinhart = float(average/THERMISTORNOMINAL)     # (R/Ro)
   steinhart = log(steinhart)                  # ln(R/Ro)
   steinhart /= BCOEFFICIENT                   # 1/B * ln(R/Ro)
-  steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15) # + (1/To)
-  steinhart = 1.0 / steinhart                 # Invert
+  steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
+  steinhart = float(1.0 / steinhart)                 # Invert
   steinhart -= 273.15                         # convert to C
 
 def do_db_update():
