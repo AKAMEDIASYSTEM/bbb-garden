@@ -17,8 +17,8 @@ I2C display(?)
 Pump Activate/Deactivate (GPIO pin)
 
 '''
-from Adafruit_I2C import Adafruit_I2C
 from __future__ import division
+from Adafruit_I2C import Adafruit_I2C
 import time
 import atexit
 import Adafruit_BBIO.UART as uart
