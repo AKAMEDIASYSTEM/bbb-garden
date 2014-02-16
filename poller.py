@@ -71,19 +71,19 @@ def do_sensor_read():
     time.sleep(1)
     tank = adc.read(tankPin) # have to read twice due to bbio bug
     time.sleep(3)
-    print tank
+    print 'tank is %s' % tank
     
     photo = adc.read(photoPin)
     time.sleep(1)
     photo = adc.read(photoPin) # have to read twice due to bbio bug
     time.sleep(3)
-    print photo
+    print 'photo is %s' % photo
 
     temp1 = adc.read_raw(thermistor1)
     time.sleep(1)
     temp1 = adc.read_raw(thermistor1)
     time.sleep(3)
-    print temp1
+    print 'temp1 raw %s' % temp1
     temp1 = convert_thermistor(temp1)
     print 'converted bed_temp is %s' % temp1
     # do conversion per
@@ -93,7 +93,7 @@ def do_sensor_read():
     time.sleep(1)
     temp2 = adc.read_raw(thermistor2)
     time.sleep(3)
-    print temp2
+    print 'temp2 raw %s' % temp2
     temp2 = convert_thermistor(temp2)
     print 'converted reservoir_temp is %s' % temp2
     # do conversion per
