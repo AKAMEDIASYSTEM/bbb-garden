@@ -41,7 +41,7 @@ tankPin = 'AIN0'
 photoPin = 'AIN1'
 thermistor1 = 'AIN2'
 thermistor2 = 'AIN3'
-pumpPin = ''
+pumpPin = 'P8_10'
 readings = []
 
 def exit_handler():
@@ -51,6 +51,7 @@ def exit_handler():
     pwm.stop(bluePin)
     pwm.stop(servoPin)
     pwm.cleanup()
+    gpio.cleanup()
 
 def do_sensor_read():
     print 'sensor read'
@@ -110,6 +111,7 @@ def do_state_display():
 print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
 adc.setup()
+gpio.setup(pumpPin,gpio.OUT)
 # t = tmp102.TMP102()
 # NOTE
 # There is currently a bug in the ADC driver.
@@ -133,5 +135,9 @@ while True:
         do_state_display()
     except:
         pass
+    if datetime.datetime.today().minute % 5 !=0:
+        gpio.output(pumpPin,gpio.LOW)
+    else:
+        gpio.output(pumpPin,gpio.HIGH)
     print 'waiting'
     time.sleep(interval)
