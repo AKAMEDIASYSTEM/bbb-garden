@@ -154,7 +154,5 @@ while True:
         do_pump_toggle()
     except:
         print 'do_pump_toggle error!'
-    else:
-        gpio.output(pumpPin,gpio.HIGH)
-    print 'waiting'
+    print 'done with cycle, now waiting %s' % datetime.datetime.today()
     time.sleep(interval)
