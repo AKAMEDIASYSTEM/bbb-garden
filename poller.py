@@ -101,18 +101,19 @@ def do_sensor_read():
     readings.append({'key':'reservoir_temp','v':temp2})
 
 def convert_thermistor(raw):
-      # convert the value to resistance
-  raw = float(1023 / raw) - 1
-  raw = float(SERIESRESISTOR / raw)
-  print 'Thermistor resistance ' 
-  print raw
- 
-  steinhart = float(raw/THERMISTORNOMINAL)     # (R/Ro)
-  steinhart = log(steinhart)                  # ln(R/Ro)
-  steinhart /= BCOEFFICIENT                   # 1/B * ln(R/Ro)
-  steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
-  steinhart = float(1.0 / steinhart)                 # Invert
-  steinhart -= 273.15                         # convert to C
+    # convert the value to resistance
+    raw = float(1023 / raw) - 1
+    raw = float(SERIESRESISTOR / raw)
+    print 'Thermistor resistance ' 
+    print raw
+    steinhart = float(raw/THERMISTORNOMINAL)     # (R/Ro)
+    steinhart = log(steinhart)                  # ln(R/Ro)
+    steinhart /= BCOEFFICIENT                   # 1/B * ln(R/Ro)
+    steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
+    steinhart = float(1.0 / steinhart)                 # Invert
+    steinhart -= 273.15                         # convert to C
+    print 'we think converted temperature is %s' % steinhart
+    return steinhart
 
 def do_db_update():
     print 'db update'
