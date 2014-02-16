@@ -111,11 +111,15 @@ def do_state_display():
 def do_pump_toggle():
     print 'pump actuate'
     if (datetime.datetime.today().hour>6 and datetime.datetime.today().hour<23):
+        print 'within actuating timeframe'
         if(datetime.datetime.today().minute%5 == 0):
+            print 'it is a minute that is 0 mod 5, so we start the pump'
             gpio.output(pumpPin,gpio.HIGH)
         else:
+            print 'shutting off pump at %s' % datetime.datetime.today().minute
             gpio.output(pumpPin,gpio.LOW)
     else:
+        print 'it is the actuator quiet period, between 11pm and 6am'
         gpio.output(pumpPin,gpio.LOW)
 
 print 'starting sampling at'
