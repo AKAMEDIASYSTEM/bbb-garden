@@ -69,17 +69,17 @@ def do_sensor_read():
     # use read_raw(pin) to get V values
     tank = adc.read(tankPin)
     tank = adc.read(tankPin) # have to read twice due to bbio bug
-    time.sleep(1)
+    time.sleep(3)
     print tank
     
     photo = adc.read(photoPin)
     photo = adc.read(photoPin) # have to read twice due to bbio bug
-    time.sleep(1)
+    time.sleep(3)
     print photo
 
     temp1 = adc.read_raw(thermistor1)
     temp1 = adc.read_raw(thermistor1)
-    time.sleep(1)
+    time.sleep(3)
     print temp1
     temp1 = convert_thermistor(temp1)
     print temp1
@@ -88,7 +88,7 @@ def do_sensor_read():
 
     temp2 = adc.read_raw(thermistor2)
     temp2 = adc.read_raw(thermistor2)
-    time.sleep(1)
+    time.sleep(3)
     print temp2
     temp2 = convert_thermistor(temp2)
     print temp2
