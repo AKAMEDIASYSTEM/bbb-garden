@@ -100,8 +100,9 @@ def do_db_update():
         client = tempodb.Client(key.API_KEY, key.API_SECRET)
         date = datetime.datetime.now(tzlocal())
         client.write_bulk(date, readings)
+        print 'wrote a result set to the DB'
     else:
-        print 'NULL readings'
+        print 'NULL readings, nothing written to DB'
 
 
 def do_state_display():
