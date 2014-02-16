@@ -102,6 +102,7 @@ def do_sensor_read():
 
 def convert_thermistor(raw):
     # convert the value to resistance
+    print 'was given %s' % raw
     raw = float(1023 / raw) - 1
     raw = float(SERIESRESISTOR / raw)
     print 'Thermistor resistance ' 
@@ -164,19 +165,23 @@ atexit.register(exit_handler)
 while True:
     try:
         do_sensor_read()
-    except:
+    except Exception, e:
+        print e
         print 'sensor_read error!'
     try:
         do_db_update()
-    except:
+    except Exception, e:
+        print e
         print 'do_db_update error!'
     try:
         do_state_display()
-    except:
+    except Exception, e:
+        print e
         print 'do_state_display error!'
     try:
         do_pump_toggle()
-    except:
+    except Exception, e:
+        print e
         print 'do_pump_toggle error!'
     print 'done with cycle, now waiting %s' % datetime.datetime.today()
     time.sleep(interval)
