@@ -1,0 +1,10 @@
+[Unit]
+Description=AKA GARDEN timer
+
+[Timer]
+OnActiveSec=200
+OnUnitInactiveSec=10
+Unit=garden.service
+
+[Install]
+WantedBy=multi-user.target

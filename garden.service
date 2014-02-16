@@ -1,0 +1,8 @@
+[Unit]
+Description=AKA Python Garden service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/root/bbb-tempo-garden/
+ExecStart=/usr/bin/python poller.py &
+KillMode=process
