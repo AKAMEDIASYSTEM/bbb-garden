@@ -110,7 +110,7 @@ def do_sensor_read():
 
 def convert_thermistor(raw):
     # convert the value to resistance
-    print 'was given %s' % raw
+    # print 'was given %s' % raw
     raw = float(1023 / raw) - 1
     raw = float(SERIESRESISTOR / raw)
     print 'Thermistor resistance ' 
@@ -121,13 +121,13 @@ def convert_thermistor(raw):
     steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
     steinhart = float(1.0 / steinhart)                 # Invert
     steinhart -= 273.15                         # convert to C
-    print 'we think converted temperature is %s' % steinhart
+    # print 'we think converted temperature is %s' % steinhart
     return steinhart
 
 def do_db_update():
     print 'db update'
     global readings
-    print readings
+    # print readings
     if len(readings) != 0:
         client = tempodb.Client(key.API_KEY, key.API_SECRET)
         date = datetime.datetime.now(tzlocal())
