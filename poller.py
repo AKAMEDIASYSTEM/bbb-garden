@@ -51,6 +51,7 @@ def exit_handler():
     pwm.stop(bluePin)
     pwm.stop(servoPin)
     pwm.cleanup()
+    gpio.output(pumpPin,gpio.LOW)
     gpio.cleanup()
 
 def do_sensor_read():
