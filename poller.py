@@ -52,11 +52,11 @@ readings = []
 
 def exit_handler():
     print 'exiting'
-    pwm.stop(greenPin)
-    pwm.stop(redPin)
-    pwm.stop(bluePin)
-    pwm.stop(servoPin)
-    pwm.cleanup()
+    # pwm.stop(greenPin)
+    # pwm.stop(redPin)
+    # pwm.stop(bluePin)
+    # pwm.stop(servoPin)
+    # pwm.cleanup()
     gpio.output(pumpPin,gpio.LOW)
     gpio.cleanup()
 
@@ -102,12 +102,12 @@ def do_sensor_read():
 
 def convert_thermistor(raw):
       # convert the value to resistance
-  raw = 1023 / raw - 1
-  average = SERIESRESISTOR / average
+  raw = float(1023 / raw) - 1
+  raw = float(SERIESRESISTOR / raw)
   print 'Thermistor resistance ' 
-  print average
+  print raw
  
-  steinhart = float(average/THERMISTORNOMINAL)     # (R/Ro)
+  steinhart = float(raw/THERMISTORNOMINAL)     # (R/Ro)
   steinhart = log(steinhart)                  # ln(R/Ro)
   steinhart /= BCOEFFICIENT                   # 1/B * ln(R/Ro)
   steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
