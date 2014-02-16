@@ -18,6 +18,7 @@ Pump Activate/Deactivate (GPIO pin)
 
 '''
 from Adafruit_I2C import Adafruit_I2C
+from __future__ import division
 import time
 import atexit
 import Adafruit_BBIO.UART as uart
@@ -30,7 +31,12 @@ from dateutil.tz import tzlocal
 import random
 import tempodb
 import key
+from math import log
 
+BCOEFFICIENT = 3950 # thermistor beta coefficient
+THERMISTORNOMINAL = 10000
+TEMPERATURENOMINAL = 25.0
+SERIESRESISTOR = 10000
 
 interval = 120 # seconds between samples
 greenPin = 'P8_13'
@@ -69,14 +75,18 @@ def do_sensor_read():
     photo = adc.read(photoPin) # have to read twice due to bbio bug
     print photo
 
-    temp1 = adc.read(thermistor1)
-    temp1 = adc.read(thermistor1)
+    temp1 = adc.read_raw(thermistor1)
+    temp1 = adc.read_raw(thermistor1)
     print temp1
+    temp1 = convert_thermistor(temp1)
+    print temp2
     # do conversion per
     # http://learn.adafruit.com/thermistor/using-a-thermistor
 
-    temp2 = adc.read(thermistor2)
-    temp2 = adc.read(thermistor2)
+    temp2 = adc.read_raw(thermistor2)
+    temp2 = adc.read_raw(thermistor2)
+    print temp2
+    temp2 = convert_thermistor(temp2)
     print temp2
     # do conversion per
     # http://learn.adafruit.com/thermistor/using-a-thermistor
@@ -89,8 +99,21 @@ def do_sensor_read():
     readings.append({'key':'photocell','v': photo}) # photocell
     readings.append({'key':'bed_temp','v':temp1})
     readings.append({'key':'reservoir_temp','v':temp2})
-    # readings.append({'key':'air_temp','v': temp_c}) # photocell
-    # readings.append({'air_temp': t.getTemp()})
+
+def convert_thermistor(raw):
+      # convert the value to resistance
+  raw = 1023 / raw - 1
+  average = SERIESRESISTOR / average
+  print 'Thermistor resistance ' 
+  print average
+ 
+  float steinhart
+  steinhart = average / THERMISTORNOMINAL     # (R/Ro)
+  steinhart = log(steinhart)                  # ln(R/Ro)
+  steinhart /= BCOEFFICIENT                   # 1/B * ln(R/Ro)
+  steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15) # + (1/To)
+  steinhart = 1.0 / steinhart                 # Invert
+  steinhart -= 273.15                         # convert to C
 
 def do_db_update():
     print 'db update'
@@ -133,9 +156,9 @@ gpio.setup(pumpPin,gpio.OUT)
 # There is currently a bug in the ADC driver.
 # You'll need to read the values twice
 # in order to get the latest value.
-pwm.start(greenPin, 10.0, 2000.0)
-pwm.start(redPin, 10.0, 2000.0)
-pwm.start(bluePin, 10.0, 2000.0)
+# pwm.start(greenPin, 10.0, 2000.0)
+# pwm.start(redPin, 10.0, 2000.0)
+# pwm.start(bluePin, 10.0, 2000.0)
 atexit.register(exit_handler)
 
 while True:
