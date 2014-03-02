@@ -20,6 +20,7 @@ Pump Activate/Deactivate (GPIO pin)
 from __future__ import division
 from Adafruit_I2C import Adafruit_I2C
 import time
+import serial
 import atexit
 import Adafruit_BBIO.UART as uart
 import Adafruit_BBIO.PWM as pwm
@@ -59,6 +60,7 @@ def exit_handler():
     # pwm.cleanup()
     gpio.output(pumpPin,gpio.LOW)
     gpio.cleanup()
+    uart.cleanup()
 
 def do_sensor_read():
     print 'sensor read'
@@ -103,10 +105,14 @@ def do_sensor_read():
     # millivolts = tmp36reading * 1800  # 1.8V reference = 1800 mV
     # temp_c = (millivolts - 500) / 10
     # print temp_c
+
+    ph_val = get_ph()
+    print 'ph_val was thoght to be %s' % ph_val
     readings.append({'key':'tankLevel','v': tank}) # tank level
     readings.append({'key':'photocell','v': photo}) # photocell
     readings.append({'key':'bed_temp','v':temp1})
     readings.append({'key':'reservoir_temp','v':temp2})
+    readings.append({'key':'pH','v':ph_val})
 
 def convert_thermistor(raw):
     # convert the value to resistance
@@ -136,6 +142,13 @@ def do_db_update():
     else:
         print 'NULL readings, nothing written to DB'
 
+def get_ph():
+    ser = serial.Serial(port = '/dev/tty/ttyO2', baudrate=38400)
+    ser.open()
+    ser.write('R\r')
+    data = ser.read()
+    print 'ph received raw as %s' data
+    return data
 
 def do_state_display():
     print 'state_display'
@@ -166,7 +179,7 @@ def do_pump_toggle():
 print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
 adc.setup()
-uart..setup('UART2')
+uart.setup('UART2')
 gpio.setup(pumpPin,gpio.OUT)
 # t = tmp102.TMP102()
 # NOTE
