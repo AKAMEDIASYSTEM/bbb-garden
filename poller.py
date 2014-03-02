@@ -38,7 +38,7 @@ THERMISTORNOMINAL = 10000
 TEMPERATURENOMINAL = 25.0
 SERIESRESISTOR = 10000
 
-interval = 120 # seconds between samples
+interval = 60 # seconds between samples
 greenPin = 'P8_13'
 bluePin = 'P9_14'
 redPin = 'P8_19'
