@@ -144,6 +144,13 @@ def do_state_display():
 
 def do_pump_toggle():
     print 'pump actuate'
+    '''
+    this should actually work like:
+    if currentMinute mod PUMP_INTERVAL < PUMP DURATION:
+        activate pump
+    else:
+        turn off pump
+    '''
     if (datetime.datetime.today().hour>6 and datetime.datetime.today().hour<23):
         print 'within actuating timeframe'
         if(datetime.datetime.today().minute%5 == 0):
@@ -159,6 +166,7 @@ def do_pump_toggle():
 print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
 adc.setup()
+uart..setup('UART2')
 gpio.setup(pumpPin,gpio.OUT)
 # t = tmp102.TMP102()
 # NOTE
