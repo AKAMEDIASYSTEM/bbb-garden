@@ -144,12 +144,14 @@ def do_db_update():
         print 'NULL readings, nothing written to DB'
 
 def get_ph():
+    uart.setup('UART2')
     ser = serial.Serial(port = '/dev/ttyO2', baudrate=38400)
     ser.open()
     ser.write('R\r')
     data = ser.read()
     print 'ph received raw as %s' % data
     ser.close()
+    uart.cleanup()
     return data
 
 def do_state_display():
@@ -181,7 +183,8 @@ def do_pump_toggle():
 print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
 adc.setup()
-uart.setup('UART2')
+# uart.setup('UART2')
+# print 'uart setup'
 gpio.setup(pumpPin,gpio.OUT)
 # t = tmp102.TMP102()
 # NOTE
