@@ -147,7 +147,7 @@ def get_ph():
     ser.open()
     ser.write('R\r')
     data = ser.read()
-    print 'ph received raw as %s' data
+    print 'ph received raw as %s' % data
     ser.close()
     return data
 
