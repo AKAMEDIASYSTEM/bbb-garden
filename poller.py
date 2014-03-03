@@ -106,14 +106,14 @@ def do_sensor_read():
     # temp_c = (millivolts - 500) / 10
     # print temp_c
 
-    ph_val = get_ph()
-    print 'ph_val was thoght to be %s' % ph_val
+    # ph_val = get_ph()
+    # print 'ph_val was thoght to be %s' % ph_val
 
     readings.append({'key':'tankLevel','v': tank}) # tank level
     readings.append({'key':'photocell','v': photo}) # photocell
-    # readings.append({'key':'bed_temp','v':temp1})
-    # readings.append({'key':'reservoir_temp','v':temp2})
-    readings.append({'key':'pH','v':ph_val})
+    readings.append({'key':'bed_temp','v':temp1})
+    readings.append({'key':'reservoir_temp','v':temp2})
+    # readings.append({'key':'pH','v':ph_val})
 
 def convert_thermistor(raw):
     # convert the value to resistance
