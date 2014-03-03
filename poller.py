@@ -144,8 +144,10 @@ def do_db_update():
         print 'NULL readings, nothing written to DB'
 
 def get_ph():
+    print 'we are in get_ph'
     uart.setup('UART2')
     ser = serial.Serial(port = '/dev/ttyO2', baudrate=38400)
+    print 'opened serial port'
     ser.open()
     ser.write('R\r')
     data = ser.read()
