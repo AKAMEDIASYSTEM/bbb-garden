@@ -108,6 +108,7 @@ def do_sensor_read():
 
     ph_val = get_ph()
     print 'ph_val was thoght to be %s' % ph_val
+
     readings.append({'key':'tankLevel','v': tank}) # tank level
     readings.append({'key':'photocell','v': photo}) # photocell
     readings.append({'key':'bed_temp','v':temp1})
@@ -143,7 +144,7 @@ def do_db_update():
         print 'NULL readings, nothing written to DB'
 
 def get_ph():
-    ser = serial.Serial(port = '/dev/tty/ttyO2', baudrate=38400)
+    ser = serial.Serial(port = '/dev/ttyO2', baudrate=38400)
     ser.open()
     ser.write('R\r')
     data = ser.read()
