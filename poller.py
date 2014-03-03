@@ -81,23 +81,23 @@ def do_sensor_read():
     time.sleep(3)
     print 'photo is %s' % photo
 
-    temp1 = adc.read_raw(thermistor1)
-    time.sleep(1)
-    temp1 = adc.read_raw(thermistor1)
-    time.sleep(3)
-    print 'temp1 raw %s' % temp1
-    temp1 = convert_thermistor(temp1)
-    print 'converted bed_temp is %s' % temp1
-    # do conversion per
-    # http://learn.adafruit.com/thermistor/using-a-thermistor
+    # temp1 = adc.read_raw(thermistor1)
+    # time.sleep(1)
+    # temp1 = adc.read_raw(thermistor1)
+    # time.sleep(3)
+    # print 'temp1 raw %s' % temp1
+    # temp1 = convert_thermistor(temp1)
+    # print 'converted bed_temp is %s' % temp1
+    # # do conversion per
+    # # http://learn.adafruit.com/thermistor/using-a-thermistor
 
-    temp2 = adc.read_raw(thermistor2)
-    time.sleep(1)
-    temp2 = adc.read_raw(thermistor2)
-    time.sleep(3)
-    print 'temp2 raw %s' % temp2
-    temp2 = convert_thermistor(temp2)
-    print 'converted reservoir_temp is %s' % temp2
+    # temp2 = adc.read_raw(thermistor2)
+    # time.sleep(1)
+    # temp2 = adc.read_raw(thermistor2)
+    # time.sleep(3)
+    # print 'temp2 raw %s' % temp2
+    # temp2 = convert_thermistor(temp2)
+    # print 'converted reservoir_temp is %s' % temp2
     # do conversion per
     # http://learn.adafruit.com/thermistor/using-a-thermistor
     # tmp36reading = adc.read_raw(tmp36Pin)
@@ -111,8 +111,8 @@ def do_sensor_read():
 
     readings.append({'key':'tankLevel','v': tank}) # tank level
     readings.append({'key':'photocell','v': photo}) # photocell
-    readings.append({'key':'bed_temp','v':temp1})
-    readings.append({'key':'reservoir_temp','v':temp2})
+    # readings.append({'key':'bed_temp','v':temp1})
+    # readings.append({'key':'reservoir_temp','v':temp2})
     readings.append({'key':'pH','v':ph_val})
 
 def convert_thermistor(raw):
