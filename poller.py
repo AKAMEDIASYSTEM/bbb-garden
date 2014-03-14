@@ -23,16 +23,17 @@ import time
 import serial
 import atexit
 import Adafruit_BBIO.UART as uart
-import Adafruit_BBIO.PWM as pwm
+# import Adafruit_BBIO.PWM as pwm
 import Adafruit_BBIO.GPIO as gpio
 import Adafruit_BBIO.ADC as adc
-import TMP102 as tmp102
+# import TMP102 as tmp102
 import datetime
 from dateutil.tz import tzlocal
-import random
+# import random
 import tempodb
 import key
 from math import log
+import requests
 
 BCOEFFICIENT = 3950 # thermistor beta coefficient
 THERMISTORNOMINAL = 10000
