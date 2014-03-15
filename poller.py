@@ -45,10 +45,10 @@ greenPin = 'P8_13'
 bluePin = 'P9_14'
 redPin = 'P8_19'
 servoPin = 'P9_16'
-tankPin = 'AIN0'
-photoPin = 'AIN3'
-thermistor1 = 'AIN1' # bed temp
-thermistor2 = 'AIN2' # reservoir temp
+tankPin = 'P9_39'
+photoPin = 'P9_38'
+thermistor1 = 'P9_40' # bed temp
+thermistor2 = 'P9_37' # reservoir temp
 pumpPin = 'P8_10'
 readings = []
 
