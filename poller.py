@@ -71,7 +71,7 @@ def do_sensor_read():
     # adc returns value from 0 to 1.
     # use read_raw(pin) to get V values
     tank = adc.read(tankPin)
-    time.sleep(1)
+    # time.sleep(1)
     tank = adc.read(tankPin) # have to read twice due to bbio bug
     time.sleep(3)
     print 'tank is %s' % tank
