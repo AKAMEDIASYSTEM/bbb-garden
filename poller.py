@@ -77,7 +77,7 @@ def do_sensor_read():
     print 'tank is %s' % tank
     
     photo = adc.read(photoPin)
-    time.sleep(1)
+    # time.sleep(1)
     photo = adc.read(photoPin) # have to read twice due to bbio bug
     time.sleep(3)
     print 'photo is %s' % photo
