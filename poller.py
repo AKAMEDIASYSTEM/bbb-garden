@@ -16,6 +16,15 @@ Analog RGB LED strip
 I2C display(?)
 Pump Activate/Deactivate (GPIO pin)
 
+Some measurements as of mid-March 2014:
+
+Tank can be pumped for 15 minutes without sun exposure to liquid.
+Seems like after 10 minutes of pumping, the autosiphon engages, though.
+Tank takes about 17 minutes to drain from a 15-minute pump
+
+11 gals in reservoir reads as 0.42 on the adc.read scale from 0 to 1
+8 gals in reservoir reads as 0.175 on the adc.read scale from 0 to 1
+7 gals in reservoir reads as 0.15 on the adc.read scale from 0 to 1
 '''
 from __future__ import division
 from Adafruit_I2C import Adafruit_I2C
@@ -51,6 +60,8 @@ thermistor1 = 'P9_40' # bed temp
 thermistor2 = 'P9_37' # reservoir temp
 pumpPin = 'P8_10'
 readings = []
+PUMP_INTERVAL = 60 # minutes between pump actuations
+PUMP_DURATION = 12 # minutes to run pump
 
 def exit_handler():
     print 'exiting'
@@ -71,16 +82,16 @@ def do_sensor_read():
     # adc returns value from 0 to 1.
     # use read_raw(pin) to get V values
     tank = adc.read(tankPin)
-    # time.sleep(1)
     tank = adc.read(tankPin) # have to read twice due to bbio bug
-    time.sleep(3)
     print 'tank is %s' % tank
+    time.sleep(3)
+    
     
     photo = adc.read(photoPin)
-    # time.sleep(1)
     photo = adc.read(photoPin) # have to read twice due to bbio bug
-    time.sleep(3)
     print 'photo is %s' % photo
+    time.sleep(3)
+    
 
     # temp1 = adc.read_raw(thermistor1)
     # time.sleep(1)
@@ -175,8 +186,8 @@ def do_pump_toggle():
     '''
     if (datetime.datetime.today().hour>6 and datetime.datetime.today().hour<23):
         print 'within actuating timeframe'
-        if(datetime.datetime.today().minute%5 == 0):
-            print 'it is a minute that is 0 mod 5, so we start the pump'
+        if((datetime.datetime.today().minute%PUMP_INTERVAL) < PUMP_DURATION):
+            print 'we are in the first %s minutes of the hour, so pump should be on.' % PUMP_INTERVAL
             gpio.output(pumpPin,gpio.HIGH)
         else:
             print 'shutting off pump at %s' % datetime.datetime.today().minute
