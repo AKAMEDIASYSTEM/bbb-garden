@@ -179,7 +179,7 @@ def do_pump_toggle():
     print 'pump actuate'
     '''
     this should actually work like:
-    if currentMinute mod PUMP_INTERVAL < PUMP DURATION:
+    if currentMinute mod PUMP_DURATION < PUMP_INTERVAL:
         activate pump
     else:
         turn off pump
