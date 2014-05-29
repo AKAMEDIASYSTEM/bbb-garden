@@ -186,7 +186,8 @@ def do_pump_toggle():
     '''
     if (datetime.datetime.today().hour>6 and datetime.datetime.today().hour<23):
         print 'within actuating timeframe'
-        if((datetime.datetime.today().minute%PUMP_DURATION) < PUMP_INTERVAL):
+        # changed this to just pump for the first PUMP_DURATION minutes every hour
+        if((datetime.datetime.today().minute <= PUMP_DURATION):
             print 'we are in the first %s minutes of the hour, so pump should be on.' % PUMP_INTERVAL
             gpio.output(pumpPin,gpio.HIGH)
         else:
