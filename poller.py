@@ -39,8 +39,8 @@ import Adafruit_BBIO.ADC as adc
 import datetime
 from dateutil.tz import tzlocal
 # import random
-import tempodb
-import key
+# import tempodb
+# import key
 from math import log
 import requests
 
@@ -65,11 +65,6 @@ PUMP_DURATION = 12 # minutes to run pump
 
 def exit_handler():
     print 'exiting'
-    # pwm.stop(greenPin)
-    # pwm.stop(redPin)
-    # pwm.stop(bluePin)
-    # pwm.stop(servoPin)
-    # pwm.cleanup()
     gpio.output(pumpPin,gpio.LOW)
     gpio.cleanup()
     uart.cleanup()
@@ -225,7 +220,8 @@ while True:
         print e
         print 'do_db_update error!'
     try:
-        do_state_display()
+        # do_state_display()
+        pass
     except Exception, e:
         print e
         print 'do_state_display error!'
