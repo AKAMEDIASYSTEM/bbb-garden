@@ -151,12 +151,15 @@ def do_db_update():
     if len(readings) != 0:
         # data.sparkfun.com is expecting:
         # bedTemp, photo, tankLevel, tankTemp
-        payload = {'public_key':k.key['phant_public'],
-        'private_key':k.key['phant_private'],
+
+        payload = {
         'photo':readings['photo'],
         'tankLevel':readings['tank'],
+        'bedTemp':100,
+        'tankTemp':100
         }
-        r = requests.post(k.key['phant_url'], data=payload)
+
+        r = requests.post(k.key['phant_url'], data=payload, headers={'Phant-Private-Key':k.key['phant_private']})
         print 'wrote a result set to the DB'
     else:
         print 'NULL readings, nothing written to DB'
