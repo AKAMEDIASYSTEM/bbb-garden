@@ -153,8 +153,8 @@ def do_db_update():
         # bedTemp, photo, tankLevel, tankTemp
 
         payload = {
-        'photo':readings[1]['photo'],
-        'tankLevel':readings[0]['tank'],
+        'photo':readings[1]['photocell'],
+        'tankLevel':readings[0]['tankLevel'],
         'bedTemp':'100',
         'tankTemp':'100'
         }
