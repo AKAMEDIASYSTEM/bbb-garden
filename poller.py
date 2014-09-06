@@ -61,7 +61,7 @@ thermistor1 = 'P9_40' # bed temp
 thermistor2 = 'P9_37' # reservoir temp
 pumpPin = 'P8_10'
 RST = 'P8_10' # OLED screen reset pin, not always necessary
-readings = []
+readings = {}
 PUMP_INTERVAL = 60 # minutes between pump actuations
 PUMP_DURATION = 12 # minutes to run pump
 
