@@ -45,7 +45,7 @@ import serial
 import atexit
 from math import log
 import requests
-import key
+import key as k
 
 BCOEFFICIENT = 3950 # thermistor beta coefficient
 THERMISTORNOMINAL = 10000
@@ -149,9 +149,14 @@ def do_db_update():
     global readings
     # print readings
     if len(readings) != 0:
-        client = tempodb.Client(key.API_KEY, key.API_SECRET)
-        date = datetime.datetime.now(tzlocal())
-        client.write_bulk(date, readings)
+        # data.sparkfun.com is expecting:
+        # bedTemp, photo, tankLevel, tankTemp
+        payload = {'public_key':k.key['phant_public'],
+        'private_key':k.key['phant_private'],
+        'photo':readings['photo'],
+        'tankLevel':readings['tank'],
+        }
+        r = requests.post(k.key['phant_url'], data=payload)
         print 'wrote a result set to the DB'
     else:
         print 'NULL readings, nothing written to DB'
