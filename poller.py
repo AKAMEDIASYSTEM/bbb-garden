@@ -216,8 +216,8 @@ def do_state_display():
     #font = ImageFont.truetype('Minecraftia.ttf', 8)
 
     # Write two lines of text.
-    draw.text((x, top),    'Hello',  font=font, fill=255)
-    draw.text((x, top+20), 'World!', font=font, fill=255)
+    draw.text((x, top),    'photo: ',  font=font, fill=255)
+    draw.text((x, top+20), 'tankLevel: ', font=font, fill=255)
 
     # Display image.
     disp.image(image)
