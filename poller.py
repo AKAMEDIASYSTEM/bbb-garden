@@ -218,6 +218,8 @@ def do_state_display():
     # Write two lines of text.
     draw.text((x, top),    'photo: ',  font=font, fill=255)
     draw.text((x, top+20), 'tankLevel: ', font=font, fill=255)
+    draw.text((x+32, top), str(readings['photocell']), font=font, fill=255)
+    draw.text((x+32, top+20), str(readings['tankLevel']), font=font, fill=255)
 
     # Display image.
     disp.image(image)
