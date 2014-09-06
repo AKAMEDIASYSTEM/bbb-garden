@@ -249,7 +249,7 @@ adc.setup()
 # print 'uart setup'
 gpio.setup(pumpPin,gpio.OUT)
 # t = tmp102.TMP102()
-disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+disp = ssd.SSD1306_128_64(rst=RST)
 disp.begin()
 disp.clear()
 disp.display()
