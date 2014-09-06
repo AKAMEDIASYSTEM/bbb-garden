@@ -35,8 +35,8 @@ import Image
 import ImageDraw
 import ImageFont
 # import Adafruit_GPIO.PWM as pwm
-import Adafruit_GPIO.GPIO as gpio
-import Adafruit_GPIO.ADC as adc
+import Adafruit_BBIO.GPIO as gpio
+import Adafruit_BBIO.ADC as adc
 # import TMP102 as tmp102
 import datetime
 from dateutil.tz import tzlocal
@@ -45,6 +45,7 @@ import serial
 import atexit
 from math import log
 import requests
+import key
 
 BCOEFFICIENT = 3950 # thermistor beta coefficient
 THERMISTORNOMINAL = 10000
