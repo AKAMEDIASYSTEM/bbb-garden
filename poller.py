@@ -30,7 +30,10 @@ from __future__ import division
 import Adafruit_GPIO.I2C as Adafruit_I2C
 import Adafruit_GPIO.SPI as spi
 import Adafruit_SSD1306 as ssd
-import Adafruit_GPIO.UART as uart
+import Adafruit_BBIO.UART as uart
+import Image
+import ImageDraw
+import ImageFont
 # import Adafruit_GPIO.PWM as pwm
 import Adafruit_GPIO.GPIO as gpio
 import Adafruit_GPIO.ADC as adc
@@ -58,6 +61,7 @@ photoPin = 'P9_38'
 thermistor1 = 'P9_40' # bed temp
 thermistor2 = 'P9_37' # reservoir temp
 pumpPin = 'P8_10'
+RST = 'P8_10' # OLED screen reset pin, not always necessary
 readings = []
 PUMP_INTERVAL = 60 # minutes between pump actuations
 PUMP_DURATION = 12 # minutes to run pump
@@ -166,6 +170,52 @@ def get_ph():
 
 def do_state_display():
     print 'state_display'
+    width = disp.width
+    height = disp.height
+    image = Image.new('1', (width, height))
+
+    # Get drawing object to draw on image.
+    draw = ImageDraw.Draw(image)
+
+    # Draw a black filled box to clear the image.
+    draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+    # Draw some shapes.
+    # First define some constants to allow easy resizing of shapes.
+    padding = 2
+    shape_width = 20
+    top = padding
+    bottom = height-padding
+    # Move left to right keeping track of the current x position for drawing shapes.
+    x = padding
+    # Draw an ellipse.
+    draw.ellipse((x, top , x+shape_width, bottom), outline=255, fill=0)
+    x += shape_width+padding
+    # Draw a rectangle.
+    draw.rectangle((x, top, x+shape_width, bottom), outline=255, fill=0)
+    x += shape_width+padding
+    # Draw a triangle.
+    draw.polygon([(x, bottom), (x+shape_width/2, top), (x+shape_width, bottom)], outline=255, fill=0)
+    x += shape_width+padding
+    # Draw an X.
+    draw.line((x, bottom, x+shape_width, top), fill=255)
+    draw.line((x, top, x+shape_width, bottom), fill=255)
+    x += shape_width+padding
+
+    # Load default font.
+    font = ImageFont.load_default()
+
+    # Alternatively load a TTF font.
+    # Some other nice fonts to try: http://www.dafont.com/bitmap.php
+    #font = ImageFont.truetype('Minecraftia.ttf', 8)
+
+    # Write two lines of text.
+    draw.text((x, top),    'Hello',  font=font, fill=255)
+    draw.text((x, top+20), 'World!', font=font, fill=255)
+
+    # Display image.
+    disp.image(image)
+    disp.display()
     # so, what will state display be?
     # I2C display of tank temp?
 
@@ -198,6 +248,10 @@ adc.setup()
 # print 'uart setup'
 gpio.setup(pumpPin,gpio.OUT)
 # t = tmp102.TMP102()
+disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+disp.begin()
+disp.clear()
+disp.display()
 # NOTE
 # There is currently a bug in the ADC driver.
 # You'll need to read the values twice
