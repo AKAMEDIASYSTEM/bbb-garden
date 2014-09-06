@@ -153,13 +153,13 @@ def do_db_update():
         # bedTemp, photo, tankLevel, tankTemp
 
         payload = {
-        'photo':readings['photo'],
-        'tankLevel':readings['tank'],
+        'photo':readings[1]['photo'],
+        'tankLevel':readings[0]['tank'],
         'bedTemp':'100',
         'tankTemp':'100'
         }
-
-        r = requests.post(k.key['phant_url'], data=payload, headers={'Phant-Private-Key':k.key['phant_private']})
+        h = {'Phant-Private-Key':k.key['phant_private']}
+        r = requests.post(k.key['phant_url'], data=payload, headers=h)
         print 'wrote a result set to the DB'
     else:
         print 'NULL readings, nothing written to DB'
