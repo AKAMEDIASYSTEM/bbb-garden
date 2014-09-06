@@ -27,8 +27,6 @@ Tank takes about 17 minutes to drain from a 15-minute pump
 7 gals in reservoir reads as 0.15 on the adc.read scale from 0 to 1
 '''
 from __future__ import division
-import Adafruit_GPIO.I2C as Adafruit_I2C
-import Adafruit_GPIO.SPI as spi
 import Adafruit_SSD1306 as ssd
 import Adafruit_BBIO.UART as uart
 import Image
@@ -151,7 +149,6 @@ def do_db_update():
     if len(readings) != 0:
         # data.sparkfun.com is expecting:
         # bedTemp, photo, tankLevel, tankTemp
-
         payload = {
         'photo':readings['photocell'],
         'tankLevel':readings['tankLevel'],
