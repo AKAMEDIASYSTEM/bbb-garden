@@ -28,9 +28,6 @@ Tank takes about 17 minutes to drain from a 15-minute pump
 '''
 from __future__ import division
 from Adafruit_I2C import Adafruit_I2C
-import time
-import serial
-import atexit
 import Adafruit_BBIO.UART as uart
 # import Adafruit_BBIO.PWM as pwm
 import Adafruit_BBIO.GPIO as gpio
@@ -38,9 +35,9 @@ import Adafruit_BBIO.ADC as adc
 # import TMP102 as tmp102
 import datetime
 from dateutil.tz import tzlocal
-# import random
-# import tempodb
-# import key
+import time
+import serial
+import atexit
 from math import log
 import requests
 
