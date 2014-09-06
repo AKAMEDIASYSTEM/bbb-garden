@@ -27,8 +27,8 @@ Tank takes about 17 minutes to drain from a 15-minute pump
 7 gals in reservoir reads as 0.15 on the adc.read scale from 0 to 1
 '''
 from __future__ import division
-from Adafruit_I2C import Adafruit_I2C
-import Adafruit_SPI as spi
+import Adafruit_GPIO.I2C as Adafruit_I2C
+import Adafruit_GPIO.SPI as spi
 import Adafruit_SSD1306 as ssd
 import Adafruit_GPIO.UART as uart
 # import Adafruit_GPIO.PWM as pwm
