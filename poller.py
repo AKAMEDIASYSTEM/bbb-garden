@@ -271,7 +271,8 @@ def do_pump_toggle():
 
 print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
-adc.setup()
+adc.setup(thermistor1)
+adc.setup(thermistor2)
 # uart.setup('UART2')
 # print 'uart setup'
 gpio.setup(pumpPin,gpio.OUT)
