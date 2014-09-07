@@ -105,7 +105,7 @@ def do_sensor_read():
 
     temp2 = adc.read_raw(thermistor2)
     time.sleep(1)
-    temp2 = adc.read_raw(thermistor2)
+    temp2 = 1023 - adc.read_raw(thermistor2)
     time.sleep(3)
     print 'temp2 raw %s' % temp2
     temp2 = convert_thermistor(temp2)
@@ -125,9 +125,6 @@ def do_sensor_read():
 
     readings['tankLevel'] = tank # tank level
     readings['photocell'] = photo # photocell
-    # readings.append({'key':'bed_temp','v':temp1})
-    # readings.append({'key':'reservoir_temp','v':temp2})
-    # readings.append({'key':'pH','v':ph_val})
 
 def convert_thermistor(raw):
     # convert the value to resistance
