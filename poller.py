@@ -93,7 +93,7 @@ def do_sensor_read():
 
     temp1 = adc.read_raw(thermistor1)
     time.sleep(1)
-    temp1 = adc.read_raw(thermistor1)
+    temp1 = 1023 - adc.read_raw(thermistor1)
     time.sleep(3)
     print 'temp1 raw %s' % temp1
     temp1 = convert_thermistor(temp1)
@@ -105,7 +105,7 @@ def do_sensor_read():
 
     temp2 = adc.read_raw(thermistor2)
     time.sleep(1)
-    temp2 = 1023 - adc.read_raw(thermistor2)
+    temp2 = adc.read_raw(thermistor2)
     time.sleep(3)
     print 'temp2 raw %s' % temp2
     temp2 = convert_thermistor(temp2)
