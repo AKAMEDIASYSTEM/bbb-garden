@@ -1,13 +1,11 @@
-bbb-tempo-garden
+bbb-garden
 ================
 
-Beaglebone Black garden monitoring with TempoDB.
-
-Currently does not reliably update to the DB - fails after awhile with a message like "too many connections" (can't recall or access verbatim message right now)
+Beaglebone Black garden monitoring with Sparkfun's phant.io timeseries DB.
 
 Sensors:
-Atlas Scientific pH sensor (38400 baud UART2 connection)
-Two NTC 10k thermistors (circuit for one of these is bonkers, yielding temperatures like -69C)
+(deprecated and removed) Atlas Scientific pH sensor (38400 baud UART2 connection)
+(not working correclty!?) Two NTC 10k thermistors (circuit for one of these is bonkers, yielding temperatures like -69C)
 10k analog photocell
 
 Actuators:
@@ -17,4 +15,4 @@ Actuators:
 
 Outputs:
 (possible) RGB LED strip for temperature history?
-(possilbe) OLED or LCD screen with tank level graphic, revervoir temperature, and days-till-nutrient-refresh?
+OLED or LCD screen with tank level graphic, revervoir temperature, and days-till-nutrient-refresh?
