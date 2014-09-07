@@ -103,7 +103,7 @@ def do_sensor_read():
     # # http://learn.adafruit.com/thermistor/using-a-thermistor
 
     temp2 = adc.read_raw(thermistor2)
-    temp2 = adc.read_raw(thermistor2)
+    temp2 = 4095.0-adc.read_raw(thermistor2)
     time.sleep(1)
     print 'temp2 raw %s' % temp2
     temp2 = convert_thermistor(temp2)
