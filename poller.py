@@ -271,10 +271,10 @@ def do_pump_toggle():
 
 print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
-adc.setup(thermistor1)
-adc.setup(thermistor2)
-adc.setup(photoPin)
-adc.setup(tankPin)
+# adc.setup(thermistor1)
+# adc.setup(thermistor2)
+# adc.setup(photoPin)
+adc.setup()
 # uart.setup('UART2')
 # print 'uart setup'
 gpio.setup(pumpPin,gpio.OUT)
@@ -304,8 +304,8 @@ while True:
         print e
         print 'do_db_update error!'
     try:
-        # do_state_display()
-        pass
+        do_state_display()
+        # pass
     except Exception, e:
         print e
         print 'do_state_display error!'
