@@ -185,7 +185,7 @@ def do_state_display():
     # Get drawing object to draw on image.
     draw = ImageDraw.Draw(image)
     # Load default font.
-    font = ImageFont.load_default()
+    # font = ImageFont.load_default()
     # Draw a black filled box to clear the image.
     draw.rectangle((0,0,width,height), outline=0, fill=0)
 
@@ -221,7 +221,7 @@ def do_state_display():
 
     # Alternatively load a TTF font.
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php
-    #font = ImageFont.truetype('Minecraftia.ttf', 8)
+    font = ImageFont.truetype('enhanced_dot_digital-7.ttf', 20)
 
     # Write two lines of text.
     draw.text((x+32, top),    str(readings['photocell']),  font=font, fill=255)
