@@ -152,6 +152,8 @@ def do_db_update():
     if len(readings) != 0:
         # data.sparkfun.com is expecting:
         # bedTemp, photo, tankLevel, tankTemp
+        bedTemp = float('{0:.2f}'.format(readings['bedTemp']))
+        tankTemp = float('{0:.2f}'.format(readings['tankTemp']))
         payload = {
         'photo':readings['photocell'],
         'tankLevel':readings['tankLevel'],
