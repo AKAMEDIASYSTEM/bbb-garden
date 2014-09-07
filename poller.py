@@ -188,7 +188,7 @@ def do_state_display():
     # font = ImageFont.load_default()
     # Alternatively load a TTF font.
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php
-    font = ImageFont.truetype('enhanced_dot_digital-7.ttf', 20)
+    font = ImageFont.truetype('Vdj.ttf', 8)
     # Draw a black filled box to clear the image.
     draw.rectangle((0,0,width,height), outline=0, fill=0)
 
@@ -206,10 +206,11 @@ def do_state_display():
     draw.text((x, top+20), 'tankLevel: ', font=font, fill=255)
     draw.text((x, top+40), 'tankTemp: ', font=font, fill=255)
     draw.text((x, top+60), 'bedTemp: ', font=font, fill=255)
-    draw.text((x+32, top),    str(readings['photocell']),  font=font, fill=255)
-    draw.text((x+32, top+20), str(readings['tankLevel']), font=font, fill=255)
-    draw.text((x+32, top+40), str(readings['tankTemp']), font=font, fill=255)      
-
+    draw.text((x+32, top),    str(readings['photocell'][:4]),  font=font, fill=255)
+    draw.text((x+32, top+20), str(readings['tankLevel'][:4]), font=font, fill=255)
+    draw.text((x+32, top+40), str(readings['tankTemp'][:4]), font=font, fill=255)      
+    draw.text((x+32, top+60), str(readings['bedTemp'][:4]), font=font, fill=255)
+    
     # Draw an ellipse.
     # draw.ellipse((x, top , x+shape_width, bottom), outline=255, fill=0)
     # x += shape_width+padding
@@ -223,8 +224,7 @@ def do_state_display():
     # draw.line((x, bottom, x+shape_width, top), fill=255)
     # draw.line((x, top, x+shape_width, bottom), fill=255)
     # x += shape_width+padding
-    draw.text((x+32, top+60), str(readings['bedTemp']), font=font, fill=255)
-
+    
     # Display image.
     disp.image(image)
     disp.display()
