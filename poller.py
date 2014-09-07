@@ -106,6 +106,7 @@ def do_sensor_read():
     temp2 = adc.read_raw(thermistor2)
     time.sleep(1)
     print 'temp2 raw %s' % temp2
+    print temp2
     temp2 = convert_thermistor(temp2)
     readings['tankTemp'] = temp2
     print 'converted reservoir_temp is %s' % temp2
