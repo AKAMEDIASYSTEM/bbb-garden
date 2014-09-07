@@ -137,7 +137,7 @@ def convert_thermistor(raw):
     steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
     steinhart = float(1.0 / steinhart)                 # Invert
     steinhart -= 273.15                         # convert to C
-    # print 'we think converted temperature is %s' % steinhart
+    print 'we think converted temperature is %s' % steinhart
     return steinhart
 
 def do_db_update():
