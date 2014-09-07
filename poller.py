@@ -128,8 +128,8 @@ def do_sensor_read():
 def convert_thermistor(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
-    raw = (1800/raw) - 1
-    raw = float(SERIESRESISTOR / float(raw))
+    raw = SERIESRESISTOR/((1800/raw) - 1)
+    # raw = float(SERIESRESISTOR / float(raw))
     print 'Thermistor resistance ' 
     print raw
     steinhart = raw/THERMISTORNOMINAL     # (R/Ro)
@@ -146,7 +146,7 @@ def convert_thermistor_special(raw):
     # print 'was given %s' % raw
     raw = (1800/raw) - 1
     # fuck me, a1 is only up against 3.73kOhm - even though it's a properly-labeled resistor!
-    raw = float(3700 / float(raw))
+    raw = float(3730 / float(raw))
     print 'Thermistor resistance ' 
     print raw
     steinhart = raw/THERMISTORNOMINAL     # (R/Ro)
@@ -273,6 +273,8 @@ print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
 adc.setup(thermistor1)
 adc.setup(thermistor2)
+adc.setup(photoPin)
+adc.setup(tankPin)
 # uart.setup('UART2')
 # print 'uart setup'
 gpio.setup(pumpPin,gpio.OUT)
