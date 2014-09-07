@@ -155,8 +155,8 @@ def do_db_update():
         payload = {
         'photo':readings['photocell'],
         'tankLevel':readings['tankLevel'],
-        'bedTemp':'100',
-        'tankTemp':'100'
+        'bedTemp':readings['bedTemp'],
+        'tankTemp':readings['tankTemp']
         }
         h = {'Phant-Private-Key':k.key['phant_private']}
         r = requests.post(k.key['phant_url'], data=payload, headers=h)
