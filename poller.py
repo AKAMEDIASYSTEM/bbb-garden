@@ -82,19 +82,18 @@ def do_sensor_read():
     tank = adc.read(tankPin)
     tank = adc.read(tankPin) # have to read twice due to bbio bug
     print 'tank is %s' % tank
-    time.sleep(3)
+    time.sleep(1)
     
     
-    photo = adc.read(photoPin)
     photo = adc.read(photoPin) # have to read twice due to bbio bug
+    photo = 1.0-adc.read(photoPin) # reverse range so that 0 is darkest
     print 'photo is %s' % photo
-    time.sleep(3)
+    time.sleep(1)
     
 
     temp1 = adc.read_raw(thermistor1)
-    time.sleep(1)
     temp1 = adc.read_raw(thermistor1)
-    time.sleep(3)
+    time.sleep(1)
     print 'temp1 raw %s' % temp1
     temp1 = convert_thermistor(temp1)
     readings['bedTemp'] = temp1
@@ -104,9 +103,8 @@ def do_sensor_read():
     # # http://learn.adafruit.com/thermistor/using-a-thermistor
 
     temp2 = adc.read_raw(thermistor2)
-    time.sleep(1)
     temp2 = adc.read_raw(thermistor2)
-    time.sleep(3)
+    time.sleep(1)
     print 'temp2 raw %s' % temp2
     temp2 = convert_thermistor(temp2)
     readings['tankTemp'] = temp2
