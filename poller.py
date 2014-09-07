@@ -49,7 +49,8 @@ BCOEFFICIENT = 3950 # thermistor beta coefficient
 THERMISTORNOMINAL = 10000
 TEMPERATURENOMINAL = 25.0
 SERIESRESISTOR = 10000
-
+# a1 = blue and white, which is bed temp
+# a2 = white and orange, which is tank temp
 interval = 60 # seconds between samples
 greenPin = 'P8_13'
 bluePin = 'P9_14'
@@ -57,8 +58,8 @@ redPin = 'P8_19'
 servoPin = 'P9_16'
 tankPin = 'P9_39'
 photoPin = 'P9_38'
-thermistor1 = 'P9_40' # bed temp
-thermistor2 = 'P9_37' # reservoir temp
+thermistor1 = 'P9_40' # AIN1, bed temp
+thermistor2 = 'P9_37' # AIN2, reservoir temp
 pumpPin = 'P8_10'
 RST = 'P8_10' # OLED screen reset pin, not always necessary
 readings = {}
@@ -90,24 +91,26 @@ def do_sensor_read():
     time.sleep(3)
     
 
-    # temp1 = adc.read_raw(thermistor1)
-    # time.sleep(1)
-    # temp1 = adc.read_raw(thermistor1)
-    # time.sleep(3)
-    # print 'temp1 raw %s' % temp1
-    # temp1 = convert_thermistor(temp1)
-    # print 'converted bed_temp is %s' % temp1
+    temp1 = adc.read_raw(thermistor1)
+    time.sleep(1)
+    temp1 = adc.read_raw(thermistor1)
+    time.sleep(3)
+    print 'temp1 raw %s' % temp1
+    temp1 = convert_thermistor(temp1)
+    readings['bedTemp'] = temp1
+    print 'converted bed_temp is %s' % temp1
     
     # # do conversion per
     # # http://learn.adafruit.com/thermistor/using-a-thermistor
 
-    # temp2 = adc.read_raw(thermistor2)
-    # time.sleep(1)
-    # temp2 = adc.read_raw(thermistor2)
-    # time.sleep(3)
-    # print 'temp2 raw %s' % temp2
-    # temp2 = convert_thermistor(temp2)
-    # print 'converted reservoir_temp is %s' % temp2
+    temp2 = adc.read_raw(thermistor2)
+    time.sleep(1)
+    temp2 = adc.read_raw(thermistor2)
+    time.sleep(3)
+    print 'temp2 raw %s' % temp2
+    temp2 = convert_thermistor(temp2)
+    readings['tankTemp'] = temp2
+    print 'converted reservoir_temp is %s' % temp2
 
     # do conversion per
     # http://learn.adafruit.com/thermistor/using-a-thermistor
@@ -129,11 +132,11 @@ def do_sensor_read():
 def convert_thermistor(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
-    raw = float(1023 / raw) - 1
-    raw = float(SERIESRESISTOR / raw)
+    raw = float(1023 / float(raw)) - 1
+    raw = float(SERIESRESISTOR / float(raw))
     print 'Thermistor resistance ' 
     print raw
-    steinhart = float(raw/THERMISTORNOMINAL)     # (R/Ro)
+    steinhart = float(float(raw)/THERMISTORNOMINAL)     # (R/Ro)
     steinhart = log(steinhart)                  # ln(R/Ro)
     steinhart /= BCOEFFICIENT                   # 1/B * ln(R/Ro)
     steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
