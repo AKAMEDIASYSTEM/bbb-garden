@@ -184,7 +184,8 @@ def do_state_display():
 
     # Get drawing object to draw on image.
     draw = ImageDraw.Draw(image)
-
+    # Load default font.
+    font = ImageFont.load_default()
     # Draw a black filled box to clear the image.
     draw.rectangle((0,0,width,height), outline=0, fill=0)
 
@@ -194,34 +195,39 @@ def do_state_display():
     shape_width = 20
     top = padding
     bottom = height-padding
+
     # Move left to right keeping track of the current x position for drawing shapes.
     x = padding
     # Draw an ellipse.
-    draw.ellipse((x, top , x+shape_width, bottom), outline=255, fill=0)
-    x += shape_width+padding
-    # Draw a rectangle.
-    draw.rectangle((x, top, x+shape_width, bottom), outline=255, fill=0)
-    x += shape_width+padding
-    # Draw a triangle.
-    draw.polygon([(x, bottom), (x+shape_width/2, top), (x+shape_width, bottom)], outline=255, fill=0)
-    x += shape_width+padding
-    # Draw an X.
-    draw.line((x, bottom, x+shape_width, top), fill=255)
-    draw.line((x, top, x+shape_width, bottom), fill=255)
-    x += shape_width+padding
+    draw.text((x, top),    'photo: ',  font=font, fill=255)
+    draw.text((x, top+20), 'tankLevel: ', font=font, fill=255)
+    draw.text((x, top+40), 'tankTemp: ', font=font, fill=255)
+    draw.text((x, top+60), 'bedTemp: ', font=font, fill=255)
 
-    # Load default font.
-    font = ImageFont.load_default()
+    # draw.ellipse((x, top , x+shape_width, bottom), outline=255, fill=0)
+    # x += shape_width+padding
+    # Draw a rectangle.
+    # draw.rectangle((x, top, x+shape_width, bottom), outline=255, fill=0)
+    # x += shape_width+padding
+    # Draw a triangle.
+    # draw.polygon([(x, bottom), (x+shape_width/2, top), (x+shape_width, bottom)], outline=255, fill=0)
+    # x += shape_width+padding
+    # Draw an X.
+    # draw.line((x, bottom, x+shape_width, top), fill=255)
+    # draw.line((x, top, x+shape_width, bottom), fill=255)
+    # x += shape_width+padding
+
+    
 
     # Alternatively load a TTF font.
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php
     #font = ImageFont.truetype('Minecraftia.ttf', 8)
 
     # Write two lines of text.
-    draw.text((x, top),    'photo: ',  font=font, fill=255)
-    draw.text((x, top+20), 'tankLevel: ', font=font, fill=255)
-    draw.text((x+32, top), str(readings['photocell']), font=font, fill=255)
+    draw.text((x+32, top),    str(readings['photocell']),  font=font, fill=255)
     draw.text((x+32, top+20), str(readings['tankLevel']), font=font, fill=255)
+    draw.text((x+32, top+40), str(readings['tankTemp']), font=font, fill=255)
+    draw.text((x+32, top+60), str(readings['bedTemp']), font=font, fill=255)
 
     # Display image.
     disp.image(image)
