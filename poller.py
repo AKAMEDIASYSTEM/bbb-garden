@@ -79,19 +79,19 @@ def do_sensor_read():
     # value = ADC.read("AIN1")
     # adc returns value from 0 to 1.
     # use read_raw(pin) to get V values
-    tank = adc.read(tankPin)
+    # tank = adc.read(tankPin)
     tank = adc.read(tankPin) # have to read twice due to bbio bug
     print 'tank is %s' % tank
     time.sleep(1)
     
     
-    photo = adc.read(photoPin) # have to read twice due to bbio bug
+    # photo = adc.read(photoPin) # have to read twice due to bbio bug
     photo = 1.0-adc.read(photoPin) # reverse range so that 0 is darkest
     print 'photo is %s' % photo
     time.sleep(1)
     
 
-    temp1 = adc.read_raw(thermistor1)
+    # temp1 = adc.read_raw(thermistor1)
     temp1 = adc.read_raw(thermistor1)
     time.sleep(1)
     print 'temp1 raw %s' % temp1
@@ -102,7 +102,7 @@ def do_sensor_read():
     # # do conversion per
     # # http://learn.adafruit.com/thermistor/using-a-thermistor
 
-    temp2 = adc.read_raw(thermistor2)
+    # temp2 = adc.read_raw(thermistor2)
     temp2 = adc.read_raw(thermistor2)
     time.sleep(1)
     print 'temp2 raw %s' % temp2
@@ -128,8 +128,6 @@ def convert_thermistor(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
     raw = (1800/raw) - 1
-
-    # fuck me, a1 is only up against 3.73kOhm - even though it's a properly-labeled resistor!
     raw = float(SERIESRESISTOR / float(raw))
     print 'Thermistor resistance ' 
     print raw
@@ -146,7 +144,6 @@ def convert_thermistor_special(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
     raw = (1800/raw) - 1
-
     # fuck me, a1 is only up against 3.73kOhm - even though it's a properly-labeled resistor!
     raw = float(3700 / float(raw))
     print 'Thermistor resistance ' 
