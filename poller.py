@@ -95,7 +95,7 @@ def do_sensor_read():
     temp1 = adc.read_raw(thermistor1)
     time.sleep(1)
     print 'temp1 raw %s' % temp1
-    temp1 = convert_thermistor(temp1)
+    temp1 = convert_thermistor_special(temp1)
     readings['bedTemp'] = temp1
     print 'converted bed_temp is %s' % temp1
     
@@ -128,7 +128,27 @@ def convert_thermistor(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
     # raw = float(1800 / float(raw)) - 1
+
+    # fuck me, a1 is only up against 3.73kOhm - even though it's a properly-labeled resistor!
     raw = float(SERIESRESISTOR / float(raw))
+    print 'Thermistor resistance ' 
+    print raw
+    steinhart = float(float(raw)/THERMISTORNOMINAL)     # (R/Ro)
+    steinhart = log(steinhart)                  # ln(R/Ro)
+    steinhart /= BCOEFFICIENT                   # 1/B * ln(R/Ro)
+    steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
+    steinhart = float(1.0 / steinhart)                 # Invert
+    steinhart -= 273.15                         # convert to C
+    print 'we think converted temperature is %s' % steinhart
+    return steinhart
+
+def convert_thermistor_special(raw):
+    # convert the value to resistance
+    # print 'was given %s' % raw
+    # raw = float(1800 / float(raw)) - 1
+
+    # fuck me, a1 is only up against 3.73kOhm - even though it's a properly-labeled resistor!
+    raw = float(3700 / float(raw))
     print 'Thermistor resistance ' 
     print raw
     steinhart = float(float(raw)/THERMISTORNOMINAL)     # (R/Ro)
