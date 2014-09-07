@@ -206,10 +206,10 @@ def do_state_display():
     draw.text((x, top+16), 'tankLevel: ', font=font, fill=255)
     draw.text((x, top+32), 'tankTemp: ', font=font, fill=255)
     draw.text((x, top+48), 'bedTemp: ', font=font, fill=255)
-    draw.text((x+32, top),    str(readings['photocell'])[:4],  font=font, fill=255)
-    draw.text((x+32, top+16), str(readings['tankLevel'])[:4], font=font, fill=255)
-    draw.text((x+32, top+32), str(readings['tankTemp'])[:4], font=font, fill=255)      
-    draw.text((x+32, top+48), str(readings['bedTemp'])[:4], font=font, fill=255)
+    draw.text((x+64, top),    str(readings['photocell'])[:4],  font=font, fill=255)
+    draw.text((x+64, top+16), str(readings['tankLevel'])[:4], font=font, fill=255)
+    draw.text((x+64, top+32), str(readings['tankTemp'])[:4], font=font, fill=255)      
+    draw.text((x+64, top+48), str(readings['bedTemp'])[:4], font=font, fill=255)
     
     # Draw an ellipse.
     # draw.ellipse((x, top , x+shape_width, bottom), outline=255, fill=0)
