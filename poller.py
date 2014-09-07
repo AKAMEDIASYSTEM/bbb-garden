@@ -304,7 +304,7 @@ while True:
         print e
         print 'do_db_update error!'
     try:
-        do_state_display()
+        # do_state_display()
         pass
     except Exception, e:
         print e
