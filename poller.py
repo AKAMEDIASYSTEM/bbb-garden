@@ -127,7 +127,7 @@ def do_sensor_read():
 def convert_thermistor(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
-    raw = float(1800 / float(raw)) - 1
+    # raw = float(1800 / float(raw)) - 1
     raw = float(SERIESRESISTOR / float(raw))
     print 'Thermistor resistance ' 
     print raw
