@@ -127,7 +127,7 @@ def do_sensor_read():
 def convert_thermistor(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
-    # raw = float(1800 / float(raw)) - 1
+    raw = float(1800 / float(raw)) - 1
 
     # fuck me, a1 is only up against 3.73kOhm - even though it's a properly-labeled resistor!
     raw = float(SERIESRESISTOR / float(raw))
@@ -145,7 +145,7 @@ def convert_thermistor(raw):
 def convert_thermistor_special(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
-    # raw = float(1800 / float(raw)) - 1
+    raw = float(1800 / float(raw)) - 1
 
     # fuck me, a1 is only up against 3.73kOhm - even though it's a properly-labeled resistor!
     raw = float(3700 / float(raw))
