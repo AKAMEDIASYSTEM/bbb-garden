@@ -127,13 +127,13 @@ def do_sensor_read():
 def convert_thermistor(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
-    raw = float(1800 / float(raw)) - 1
+    raw = (1800/raw) - 1
 
     # fuck me, a1 is only up against 3.73kOhm - even though it's a properly-labeled resistor!
     raw = float(SERIESRESISTOR / float(raw))
     print 'Thermistor resistance ' 
     print raw
-    steinhart = float(float(raw)/THERMISTORNOMINAL)     # (R/Ro)
+    steinhart = raw/THERMISTORNOMINAL     # (R/Ro)
     steinhart = log(steinhart)                  # ln(R/Ro)
     steinhart /= BCOEFFICIENT                   # 1/B * ln(R/Ro)
     steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
@@ -145,13 +145,13 @@ def convert_thermistor(raw):
 def convert_thermistor_special(raw):
     # convert the value to resistance
     # print 'was given %s' % raw
-    raw = float(1800 / float(raw)) - 1
+    raw = (1800/raw) - 1
 
     # fuck me, a1 is only up against 3.73kOhm - even though it's a properly-labeled resistor!
     raw = float(3700 / float(raw))
     print 'Thermistor resistance ' 
     print raw
-    steinhart = float(float(raw)/THERMISTORNOMINAL)     # (R/Ro)
+    steinhart = raw/THERMISTORNOMINAL     # (R/Ro)
     steinhart = log(steinhart)                  # ln(R/Ro)
     steinhart /= BCOEFFICIENT                   # 1/B * ln(R/Ro)
     steinhart += float(1.0 / (TEMPERATURENOMINAL + 273.15)) # + (1/To)
