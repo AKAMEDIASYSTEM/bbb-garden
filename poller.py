@@ -279,7 +279,7 @@ adc.setup(tankPin)
 # print 'uart setup'
 gpio.setup(pumpPin,gpio.OUT)
 # t = tmp102.TMP102()
-disp = ssd.SSD1306_128_64(rst=RST,i2c_address=0x3D)
+disp = ssd.SSD1306_128_64(rst=RST,i2c_address=0x3C)
 disp.begin()
 disp.clear()
 disp.display()
