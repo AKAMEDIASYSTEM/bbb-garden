@@ -7,7 +7,7 @@
 import Si7005
 import time
 
-s = Si7005('P9_21')
+s = Si7005.Si7005('P9_21')
 while(1):
 	print s.getTemperature()
 	print s.getHumidity()
