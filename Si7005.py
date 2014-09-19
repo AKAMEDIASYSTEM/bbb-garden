@@ -3,11 +3,11 @@
 # -*- coding: utf-8 -*-
 # mar 2014 python port of Si7005 arduino library
 # AKA
-
+from __future__ import division
 from Adafruit_I2C import Adafruit_I2C
 from Adafruit_GPIO import GPIO
 import time
-from __future__ import division
+
 
 class si7005():
     # /* Si7005 Registers */
