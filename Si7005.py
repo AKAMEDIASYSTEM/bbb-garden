@@ -70,7 +70,7 @@ class si7005():
         else:
             return False
     
-    def doMeasurement(byte configValue):
+    def doMeasurement(configValue):
         GPIO.output(pin, GPIO.LOW) # enable sensor
         time.sleep(WAKE_UP_TIME) # wait for wakeup
 
