@@ -47,7 +47,7 @@ class si7005():
 
 
     def __init__(pin):
-    	self.i2c = Adafruit_I2C(self.SI7005_ADR)
+    	self.i2c = Adafruit_I2C(SI7005_ADR)
     	GPIO.setup(pin, GPIO.OUT)
     	GPIO.output(pin,GPIO.HIGH)
     	self._cs_pin = pin
