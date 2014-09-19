@@ -47,7 +47,7 @@ class si7005():
 
 
     def __init__(pin):
-    	self.i2c = Adafruit_I2C(SI7005_ADR)
+    	self.i2c = Adafruit_I2C(self.SI7005_ADR)
     	GPIO.setup(pin, GPIO.OUT)
     	GPIO.output(pin,GPIO.HIGH)
     	self._cs_pin = pin
@@ -58,46 +58,46 @@ class si7005():
     def detectSensor():
         # byte deviceID
         GPIO.output(pin,GPIO.LOW)
-        time.sleep(WAKE_UP_TIME)
+        time.sleep(self.WAKE_UP_TIME)
         # i2c.beginTransmission(self.SI7005_ADR)
-        i2c.write8(SI7005_ADR, REG_ID)
+        i2c.write8(self.SI7005_ADR, self.REG_ID)
         # i2c.endTransmission(false)
         # i2c.requestFrom(SI7005_ADR,1)
-        deviceID = i2c.readU8(SI7005_ADR)
+        deviceID = i2c.readU8(self.SI7005_ADR)
         GPIO.output(pin.GPIO.HIGH)
-        if (deviceID & ID_SAMPLE) == ID_SI7005:
+        if (deviceID & self.ID_SAMPLE) == self.ID_SI7005:
             return True
         else:
             return False
     
     def doMeasurement(configValue):
         GPIO.output(pin, GPIO.LOW) # enable sensor
-        time.sleep(WAKE_UP_TIME) # wait for wakeup
+        time.sleep(self.WAKE_UP_TIME) # wait for wakeup
 
-        i2c.write8(SI7005_ADR, REG_CONFIG) # select config register
-        i2c.write8(SI7005_ADR, (CONFIG_START | configValue | _config_reg)) # Start measurement of the selected type (Temperature / humidity)
-        measurementStatus = STATUS_NOT_READY
+        i2c.write8(self.SI7005_ADR, self.REG_CONFIG) # select config register
+        i2c.write8(self.SI7005_ADR, (self.CONFIG_START | self.configValue | self._config_reg)) # Start measurement of the selected type (Temperature / humidity)
+        measurementStatus = self.STATUS_NOT_READY
 
-        while (measurementStatus & STATUS_NOT_READY):
-            i2c.write8(SI7005_ADR, REG_STATUS)
-            measurementStatus = i2c.readU8(SI7005_ADR)
+        while (measurementStatus & self.STATUS_NOT_READY):
+            i2c.write8(self.SI7005_ADR, self.REG_STATUS)
+            measurementStatus = i2c.readU8(self.SI7005_ADR)
 
-        i2c.write8(SI7005_ADR, REG_DATA)
-        rawData = i2c.readU8(SI7005_ADR) << 8 # MSB
-        rawData |= i2c.readU8(SI7005_ADR) # LSB
+        i2c.write8(self.SI7005_ADR, REG_DATA)
+        rawData = i2c.readU8(self.SI7005_ADR) << 8 # MSB
+        rawData |= i2c.readU8(self.SI7005_ADR) # LSB
 
         GPIO.output(GPIO.HIGH) # disable sensor
 
         return rawData
 
     def getTemperature():
-    	rawTemperature = self.doMeasurement(CONFIG_TEMPERATURE) >> 2
-        _last_temperature = ( rawTemperature / TEMPERATURE_SLOPE ) - TEMPERATURE_OFFSET
+    	rawTemperature = self.doMeasurement(self.CONFIG_TEMPERATURE) >> 2
+        _last_temperature = ( rawTemperature / self.TEMPERATURE_SLOPE ) - self.TEMPERATURE_OFFSET
         return _last_temperature
 
     def getHumidity( ):
-    	rawHumidity = doMeasurement(CONFIG_HUMIDITY) >> 4
-        curve = (rawHumidity / HUMIDITY_SLOPE) - HUMIDITY_OFFSET
+    	rawHumidity = doMeasurement(self.CONFIG_HUMIDITY) >> 4
+        curve = (rawHumidity / self.HUMIDITY_SLOPE) - self.HUMIDITY_OFFSET
         linearHumidity = curve - ( (curve*curve)*a2 + curve*a1 +  a0)
         linearHumidity = linearHumidity + ( _last_temperature - 30 ) * ( linearHumidity * q1 + q0 )
         return linearHumidity
