@@ -44,6 +44,7 @@ import atexit
 from math import log
 import requests
 import key as k
+import logging
 
 BCOEFFICIENT = 3950 # thermistor beta coefficient
 THERMISTORNOMINAL = 10000
@@ -271,6 +272,7 @@ def do_pump_toggle():
 
 print 'starting sampling at'
 print datetime.datetime.now(tzlocal())
+logging.basicConfig(filename='example.log',level=logging.DEBUG)
 # adc.setup(thermistor1)
 # adc.setup(thermistor2)
 # adc.setup(photoPin)
