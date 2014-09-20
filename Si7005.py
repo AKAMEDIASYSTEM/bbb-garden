@@ -5,7 +5,7 @@
 # AKA
 from __future__ import division
 from Adafruit_I2C import Adafruit_I2C
-from Adafruit_BBIO import GPIO as GPIO
+import Adafruit_BBIO.GPIO as GPIO
 import time
 
 
