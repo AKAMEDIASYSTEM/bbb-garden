@@ -4,7 +4,7 @@
 # mar 2014 python port of Si7005 arduino library
 # AKA
 from __future__ import division
-import Adafruit_GPIO.I2C as I2C
+from Adafruit_I2C import Adafruit_I2C
 import Adafruit_BBIO.GPIO as GPIO
 import time
 
@@ -47,7 +47,7 @@ class si7005():
 
 
     def __init__(self,pin):
-    	self.i2c = I2C(self.SI7005_ADR)
+    	self.i2c = Adafruit_I2C(self.SI7005_ADR)
     	GPIO.setup(pin, GPIO.OUT)
     	GPIO.output(pin,GPIO.HIGH)
     	self._cs_pin = pin
