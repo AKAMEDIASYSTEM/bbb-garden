@@ -5,7 +5,7 @@
 # AKA
 from __future__ import division
 from Adafruit_I2C import Adafruit_I2C
-from Adafruit_GPIO import GPIO
+from Adafruit_GPIO import GPIO as GPIO
 import time
 
 
@@ -48,7 +48,7 @@ class si7005():
 
     def __init__(self,pin):
     	self.i2c = Adafruit_I2C(self.SI7005_ADR)
-    	GPIO.GPIO.setup(pin, GPIO.OUT)
+    	GPIO.setup(pin, GPIO.OUT)
     	GPIO.output(pin,GPIO.HIGH)
     	self._cs_pin = pin
 
