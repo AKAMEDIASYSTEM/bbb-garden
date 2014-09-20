@@ -41,7 +41,7 @@ class si7005():
     q0 =  0.1973
     q1 =  0.00237
 
-    WAKE_UP_TIME = 0.15 # AKA thinks this was 15ms, so changing it to 0.015sec
+    WAKE_UP_TIME = 0.015 # AKA thinks this was 15ms, so changing it to 0.015sec
     # address
     SI7005_ADR = 0x40
 
@@ -60,8 +60,9 @@ class si7005():
         # byte deviceID
         GPIO.output(self._cs_pin, GPIO.LOW)
         time.sleep(self.WAKE_UP_TIME)
+        print 'detect detectSensor'
         # i2c.beginTransmission(self.SI7005_ADR)
-        i2c.write8(self.SI7005_ADR, self.REG_ID)
+        self.i2c.write8(self.SI7005_ADR, self.REG_ID)
         # i2c.endTransmission(false)
         # i2c.requestFrom(SI7005_ADR,1)
         deviceID = self.i2c.readU8(self.SI7005_ADR)
