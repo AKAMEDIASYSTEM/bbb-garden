@@ -46,7 +46,7 @@ class si7005():
     SI7005_ADR = 0x40
 
 
-    def __init__(pin):
+    def __init__(self,pin):
     	self.i2c = Adafruit_I2C(self.SI7005_ADR)
     	GPIO.setup(pin, GPIO.OUT)
     	GPIO.output(pin,GPIO.HIGH)
@@ -55,7 +55,7 @@ class si7005():
     	self._last_temperature = 25.0
     	self._config_reg = 0
     
-    def detectSensor():
+    def detectSensor(self):
         # byte deviceID
         GPIO.output(pin,GPIO.LOW)
         time.sleep(self.WAKE_UP_TIME)
@@ -70,7 +70,7 @@ class si7005():
         else:
             return False
     
-    def doMeasurement(configValue):
+    def doMeasurement(self,configValue):
         GPIO.output(pin, GPIO.LOW) # enable sensor
         time.sleep(self.WAKE_UP_TIME) # wait for wakeup
 
@@ -90,26 +90,26 @@ class si7005():
 
         return rawData
 
-    def getTemperature():
+    def getTemperature(self):
     	rawTemperature = self.doMeasurement(self.CONFIG_TEMPERATURE) >> 2
         _last_temperature = ( rawTemperature / self.TEMPERATURE_SLOPE ) - self.TEMPERATURE_OFFSET
         return _last_temperature
 
-    def getHumidity( ):
+    def getHumidity( self):
     	rawHumidity = doMeasurement(self.CONFIG_HUMIDITY) >> 4
         curve = (rawHumidity / self.HUMIDITY_SLOPE) - self.HUMIDITY_OFFSET
         linearHumidity = curve - ( (curve*curve)*a2 + curve*a1 +  a0)
         linearHumidity = linearHumidity + ( _last_temperature - 30 ) * ( linearHumidity * q1 + q0 )
         return linearHumidity
 
-    def enableHeater( ):
+    def enableHeater(self ):
     	_config_reg |= CONFIG_HEAT
 
-    def disableHeater( ):
+    def disableHeater(self ):
     	_config_reg ^= CONFIG_HEAT
 
-    def enableFastMeasurements( ):
+    def enableFastMeasurements(self ):
     	_config_reg |= CONFIG_FAST
 
-    def disableFastMeasurements( ):
+    def disableFastMeasurements(self ):
     	_config_reg ^= CONFIG_FAST
