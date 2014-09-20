@@ -43,7 +43,7 @@ class si7005():
 
     WAKE_UP_TIME = 0.15 # AKA thinks this was 15ms, so changing it to 0.015sec
     # address
-    SI7005_ADR = 0x34
+    SI7005_ADR = 0x40
 
 
     def __init__(self,pin):
