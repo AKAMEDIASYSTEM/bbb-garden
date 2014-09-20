@@ -47,6 +47,7 @@ class si7005():
 
 
     def __init__(self,pin):
+        print 'init si'
     	self.i2c = Adafruit_I2C(self.SI7005_ADR)
     	GPIO.setup(pin, GPIO.OUT)
     	GPIO.output(pin,GPIO.HIGH)
@@ -60,7 +61,7 @@ class si7005():
         GPIO.output(self._cs_pin, GPIO.LOW)
         time.sleep(self.WAKE_UP_TIME)
         # i2c.beginTransmission(self.SI7005_ADR)
-        # self.i2c.write8(self.SI7005_ADR, self.REG_ID)
+        i2c.write8(self.SI7005_ADR, self.REG_ID)
         # i2c.endTransmission(false)
         # i2c.requestFrom(SI7005_ADR,1)
         deviceID = self.i2c.readU8(self.SI7005_ADR)
