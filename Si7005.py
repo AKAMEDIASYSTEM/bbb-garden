@@ -63,7 +63,7 @@ class si7005():
         # self.i2c.write8(self.SI7005_ADR, self.REG_ID)
         # i2c.endTransmission(false)
         # i2c.requestFrom(SI7005_ADR,1)
-        deviceID = self.i2c.readU8(self.SI7005_ADR)
+        deviceID = self.i2c.readU8(self.REG_ID)
         GPIO.output(self._cs_pin, GPIO.HIGH)
         if (deviceID & self.ID_SAMPLE) == self.ID_SI7005:
             return True
