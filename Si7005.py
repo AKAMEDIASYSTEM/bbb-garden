@@ -41,7 +41,7 @@ class si7005():
     q0 =  0.1973
     q1 =  0.00237
 
-    WAKE_UP_TIME = 0.015 # AKA thinks this was 15ms, so changing it to 0.015sec
+    WAKE_UP_TIME = 15 # AKA thinks this was 15ms, so changing it to 0.015sec
     # address
     SI7005_ADR = 0x40
 
