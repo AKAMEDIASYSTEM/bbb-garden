@@ -57,21 +57,21 @@ class si7005():
     
     def detectSensor(self):
         # byte deviceID
-        GPIO.output(pin,GPIO.LOW)
+        GPIO.output(self._cs_pin, GPIO.LOW)
         time.sleep(self.WAKE_UP_TIME)
         # i2c.beginTransmission(self.SI7005_ADR)
         i2c.write8(self.SI7005_ADR, self.REG_ID)
         # i2c.endTransmission(false)
         # i2c.requestFrom(SI7005_ADR,1)
         deviceID = i2c.readU8(self.SI7005_ADR)
-        GPIO.output(pin.GPIO.HIGH)
+        GPIO.output(self._cs_pin, GPIO.HIGH)
         if (deviceID & self.ID_SAMPLE) == self.ID_SI7005:
             return True
         else:
             return False
     
     def doMeasurement(self,configValue):
-        GPIO.output(pin, GPIO.LOW) # enable sensor
+        GPIO.output(self._cs_pin, GPIO.LOW) # enable sensor
         time.sleep(self.WAKE_UP_TIME) # wait for wakeup
 
         i2c.write8(self.SI7005_ADR, self.REG_CONFIG) # select config register
@@ -86,7 +86,7 @@ class si7005():
         rawData = i2c.readU8(self.SI7005_ADR) << 8 # MSB
         rawData |= i2c.readU8(self.SI7005_ADR) # LSB
 
-        GPIO.output(GPIO.HIGH) # disable sensor
+        GPIO.output(self._cs_pin, GPIO.HIGH) # disable sensor
 
         return rawData
 
