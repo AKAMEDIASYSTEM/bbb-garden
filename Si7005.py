@@ -60,10 +60,10 @@ class si7005():
         GPIO.output(self._cs_pin, GPIO.LOW)
         time.sleep(self.WAKE_UP_TIME)
         # i2c.beginTransmission(self.SI7005_ADR)
-        i2c.write8(self.SI7005_ADR, self.REG_ID)
+        self.i2c.write8(self.SI7005_ADR, self.REG_ID)
         # i2c.endTransmission(false)
         # i2c.requestFrom(SI7005_ADR,1)
-        deviceID = i2c.readU8(self.SI7005_ADR)
+        deviceID = self.i2c.readU8(self.SI7005_ADR)
         GPIO.output(self._cs_pin, GPIO.HIGH)
         if (deviceID & self.ID_SAMPLE) == self.ID_SI7005:
             return True
@@ -74,17 +74,17 @@ class si7005():
         GPIO.output(self._cs_pin, GPIO.LOW) # enable sensor
         time.sleep(self.WAKE_UP_TIME) # wait for wakeup
 
-        i2c.write8(self.SI7005_ADR, self.REG_CONFIG) # select config register
-        i2c.write8(self.SI7005_ADR, (self.CONFIG_START | self.configValue | self._config_reg)) # Start measurement of the selected type (Temperature / humidity)
+        self.i2c.write8(self.SI7005_ADR, self.REG_CONFIG) # select config register
+        self.i2c.write8(self.SI7005_ADR, (self.CONFIG_START | self.configValue | self._config_reg)) # Start measurement of the selected type (Temperature / humidity)
         measurementStatus = self.STATUS_NOT_READY
 
         while (measurementStatus & self.STATUS_NOT_READY):
-            i2c.write8(self.SI7005_ADR, self.REG_STATUS)
-            measurementStatus = i2c.readU8(self.SI7005_ADR)
+            self.i2c.write8(self.SI7005_ADR, self.REG_STATUS)
+            measurementStatus = self.i2c.readU8(self.SI7005_ADR)
 
-        i2c.write8(self.SI7005_ADR, REG_DATA)
-        rawData = i2c.readU8(self.SI7005_ADR) << 8 # MSB
-        rawData |= i2c.readU8(self.SI7005_ADR) # LSB
+        self.i2c.write8(self.SI7005_ADR, REG_DATA)
+        rawData = self.i2c.readU8(self.SI7005_ADR) << 8 # MSB
+        rawData |= self.i2c.readU8(self.SI7005_ADR) # LSB
 
         GPIO.output(self._cs_pin, GPIO.HIGH) # disable sensor
 
