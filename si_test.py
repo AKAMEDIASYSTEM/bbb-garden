@@ -9,7 +9,11 @@ import time
 
 s = Si7005.si7005(pin='P9_21')
 # s = Si7005.si7005()
-while(s.detectSensor()):
-	print s.getTemperature()
-	print s.getHumidity()
+while(1):
+	if s.detectSensor():
+		print s.getTemperature()
+		print s.getHumidity()
+else:
+	print 'cannot find sensor'
+	print s
 	time.sleep(1)
