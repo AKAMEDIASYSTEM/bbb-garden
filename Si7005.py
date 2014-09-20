@@ -75,7 +75,7 @@ class si7005():
         time.sleep(self.WAKE_UP_TIME) # wait for wakeup
 
         self.i2c.write8(self.SI7005_ADR, self.REG_CONFIG) # select config register
-        self.i2c.write8(self.SI7005_ADR, (self.CONFIG_START | self.configValue | self._config_reg)) # Start measurement of the selected type (Temperature / humidity)
+        self.i2c.write8(self.SI7005_ADR, (self.CONFIG_START | configValue | self._config_reg)) # Start measurement of the selected type (Temperature / humidity)
         measurementStatus = self.STATUS_NOT_READY
 
         while (measurementStatus & self.STATUS_NOT_READY):
